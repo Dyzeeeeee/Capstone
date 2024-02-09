@@ -37,15 +37,17 @@
                             </q-item-section>
                         </q-item>
                         <q-separator spaced />
+                        <router-link to="/admin/dashboard" style="  text-decoration: none; color: inherit;">
 
-                        <q-item clickable v-ripple>
-                            <q-item-section avatar>
-                                <q-icon name="insert_chart_outlined" />
-                            </q-item-section>
-                            <q-item-section>
-                                Dashboard
-                            </q-item-section>
-                        </q-item>
+                            <q-item clickable v-ripple>
+                                <q-item-section avatar>
+                                    <q-icon name="insert_chart_outlined" />
+                                </q-item-section>
+                                <q-item-section>
+                                    Dashboard
+                                </q-item-section>
+                            </q-item>
+                        </router-link>
                         <q-item-label header>Restaurant</q-item-label>
                         <router-link to="/admin/menu" style="  text-decoration: none; color: inherit;">
                             <q-item clickable v-ripple>

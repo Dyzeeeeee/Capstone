@@ -1,7 +1,8 @@
 <template>
     <div class="q-pa-md">
-        <div class="row items-center q-mb-md" style="display: flex; align-items: center;">
 
+        <div class="row items-center q-mb-md" style="display: flex; align-items: center;">
+            <!--Breacrumb Title-->
             <div class="col-4 q-pl-lg">
                 <q-breadcrumbs class="text-green-9">
                     <template v-slot:separator>
@@ -11,10 +12,13 @@
                     <q-breadcrumbs-el label="Menu" icon="menu_book" />
                 </q-breadcrumbs>
             </div>
+            <!--Breacrumb Title-->
+
+            <!-- Actions-->
 
             <div class="col-8 row justify-end ">
                 <div class="col-auto ">
-                    <q-btn @click="onFilterClick" flat color="primary" icon="filter_alt" />
+                    <q-btn @click="openFilterDialog" flat color="primary" icon="filter_alt" />
                 </div>
                 <div class="col-5 ">
                     <q-input borderless dense debounce="300" v-model="filter" placeholder="Search name">
@@ -31,15 +35,23 @@
                     <q-btn flat color="secondary" icon="view_list" />
                 </div>
             </div>
-
+            <!-- Actions-->
         </div>
 
-        <q-table flat bordered :rows="filteredRows" :columns="columns" row-key="name" v-model:pagination="pagination"
+        <!-- Table-->
+        <q-table flat bordered :rows="tableData" :columns="columns" row-key="name" v-model:pagination="pagination"
             hide-pagination>
             <template #body-cell-actions="props">
                 <q-td :props="props">
                     <q-btn @click="onEditClick(props.row.name)" flat round icon="edit_note" color="secondary" />
                     <q-btn @click="onDeleteClick(props.row.name)" flat round icon="delete" color="negative" />
+                </q-td>
+            </template>
+            <!-- Custom slot for rendering the image in the 'image' column -->
+            <template #body-cell-image="props">
+                <q-td :props="props">
+                    <img :src="props.row.image" alt="Menu Image"
+                        style="max-width: 100px; height: 70px; "/>
                 </q-td>
             </template>
         </q-table>
@@ -48,37 +60,76 @@
             <q-pagination v-model="pagination.page" color="grey-8" :max="pagesNumber" size="sm"
                 @input="onPaginationChange" />
         </div>
+        <!-- Table-->
+
     </div>
 
-
+    <!-- Add Dialog-->
     <q-dialog v-model="showAddDialog">
-        <q-card class="my-card">
+        <q-card class="my-card" style="width: 400px;">
             <q-card-section>
                 <div class="text-h6 text-bold">Add Menu</div>
             </q-card-section>
 
             <q-separator />
             <q-card-section class="q-pt-md ">
-                <q-form @submit="addMenu">
-                    <div class="q-gutter-md">
-                        <q-input dense v-model="newName" label="Name" required />
-                        <q-input dense v-model="newDescription" label="Description" required />
-                        <q-input dense v-model="newPrice" label="Price" required />
-                        <q-input dense v-model="newCategory" label="Category" required />
+                <div class="q-gutter-md">
+                    <q-input dense v-model="data.name" label="Name" required />
+                    <q-input dense v-model="data.description" label="Description" required />
+                    <q-input dense v-model="data.price" label="Price" required />
+                    <q-input dense v-model="data.category" label="Category" required />
 
-                        <!-- Use q-uploader for image input -->
-                        <q-uploader v-model="newImage" label="Image" color="secondary" accept="image/*" @added="onFileAdded"   max-files="1"
-                            @failed="onFileFailed" class="q-mt-md" />
+                    <label for="imageInput" class="custom-file-label">{{ selectedFile ? selectedFile.name : 'Add Image'
+                    }}</label>
+                    <input type="file" id="imageInput" @change="handleFileChange" style="display: none; width: 400px;" />
+                    <div v-if="selectedFile" class="row justify-center">
+                        <img :src="imagePreview" alt="Selected Image" style="max-width: 200px" />
+                    </div>
+                </div>
+                <q-separator />
+                <q-card-actions align="right">
+                    <q-btn outline @click="closeDialog" color="negative" label="Cancel" no-caps style="width: 85px;" />
+                    <q-btn outline @click="addData" color="green" label="Confirm" no-caps style="width: 85px;" />
+                </q-card-actions>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
+    <!-- Add Dialog-->
+    <!-- Filter Dialog-->
+    <q-dialog v-model="showFilterDialog">
+        <q-card class="my-card">
+            <q-card-section>
+                <div class="text-h6 text-bold">Select Filters</div>
+            </q-card-section>
+
+            <q-separator />
+            <q-card-section class="q-pt-md ">
+                <q-form @submit="FilterMenu">
+                    <div class="q-gutter-md">
+                        <div class="row justify-between">
+                            <div class="col-5 ">
+                                <q-input dense outlined v-model="minPrice" label="Min Price" type="number" required />
+                            </div>
+                            <div class="col-2 text-center self-center">
+                                --
+                            </div>
+                            <div class="col-5 ">
+                                <q-input dense outlined v-model="maxPrice" label="Max Price" type="number" required />
+                            </div>
+                        </div>
+                        <q-input dense v-model="newCategory" label="Category" required />
+                        <q-input dense v-model="newCategory" label="Label" required />
                     </div>
                     <q-separator />
                     <q-card-actions align="right">
-                        <q-btn outline @click="closeAddDialog" color="negative" label="Cancel" no-caps style="width: 85px;"/>
+                        <q-btn outline @click="closeDialog" color="negative" label="Cancel" no-caps style="width: 85px;" />
                         <q-btn outline type="submit" color="green" label="Confirm" no-caps style="width: 85px;" />
                     </q-card-actions>
                 </q-form>
             </q-card-section>
         </q-card>
     </q-dialog>
+    <!-- Dialog-->
 </template>
 
 <script setup>
@@ -86,36 +137,51 @@ import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
 
 const showAddDialog = ref(false);
-const newItemName = ref('');
-const newItemDescription = ref('');
-const newItemPrice = ref('');
-const newItemCategory = ref('');
+const showFilterDialog = ref(false);
+const selectedFile = ref(null);
+const imagePreview = ref(null);
+const imageUrls = ref([]);
+
+const data = ref({
+    name: '',
+    description: '',
+    price: '',
+    category: '',
+    image: '',
+});
+
+const handleFileChange = (event) => {
+    selectedFile.value = event.target.files[0];
+    previewImage();
+};
+
+const previewImage = () => {
+    if (selectedFile.value) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            imagePreview.value = reader.result;
+        };
+        reader.readAsDataURL(selectedFile.value);
+    }
+};
+
 const openAddDialog = () => {
+    data.value = {
+        name: '',
+        description: '',
+        price: '',
+        category: '',
+    };
     showAddDialog.value = true;
 };
 
-const closeAddDialog = () => {
-    // Clear the form fields when closing the dialog
-    newItemName.value = '';
-    newItemDescription.value = '';
-    newItemPrice.value = '';
-    newItemCategory.value = '';
-
-    showAddDialog.value = false;
+const openFilterDialog = () => {
+    showFilterDialog.value = true;
 };
 
-const addNewItem = () => {
-    // Implement logic to add the new item to the data source
-    // You can use newItemName, newItemDescription, newItemPrice, newItemCategory, etc.
-    console.log('Adding new item:', {
-        name: newItemName.value,
-        description: newItemDescription.value,
-        price: newItemPrice.value,
-        category: newItemCategory.value,
-    });
-
-    // Close the dialog
-    closeAddDialog();
+const closeDialog = () => {
+    showAddDialog.value = false;
+    showFilterDialog.value = false;
 };
 
 
@@ -126,44 +192,107 @@ const pagination = ref({
     rowsPerPage: 10
 });
 
+
 const filter = ref('');
-const filteredRows = ref([]);
+const tableData = ref([]);
 
 const pagesNumber = computed(() => {
-    return Math.ceil(filteredRows.value.length / pagination.value.rowsPerPage);
+    return Math.ceil(tableData.value.length / pagination.value.rowsPerPage);
 });
 
-const fetchRows = async () => {
+
+const getData = async () => {
     try {
         const response = await axios.get('menu/getData');
-        filteredRows.value = response.data.filter(row => row.name.toLowerCase().includes(filter.value.toLowerCase()));
+        tableData.value = response.data.filter(row => row.name.toLowerCase().includes(filter.value.toLowerCase()));
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
 
+const addData = async () => {
+    try {
+        // Send a POST request to add data
+        const formData = new FormData();
+        formData.append('image', selectedFile.value);
+
+        // Replace '/upload' with the actual URL of your CodeIgniter API endpoint
+        const uploadResponse = await axios.post('menu/uploadImage', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        // Assuming the filename is returned in the 'message' field
+        const filename = uploadResponse.data.filename;
+        console.log('Image Filename:', filename);
+
+        // Update the 'image' field in the data object with just the filename
+        data.value.image = filename;
+
+        // Send the modified data object to the API
+        await axios.post('menu/addData', data.value);
+
+        // Fetch the updated data after adding
+        const response = await axios.get('menu/getData');
+
+        // Update the table data
+        tableData.value = response.data;
+
+        // Close the dialog
+        showAddDialog.value = false;
+
+        closeDialog();
+    } catch (error) {
+        console.error('Error adding menu:', error);
+
+        // Log the specific error message
+        if (error.response) {
+            console.error('Response error:', error.response.data);
+        } else if (error.request) {
+            console.error('Request error:', error.request);
+        } else {
+            console.error('General error:', error.message);
+        }
+    }
+};
+
+
+const fetchAllImages = () => {
+    // Replace '/fetchAllImages' with the actual URL of your endpoint to fetch all images from the database
+    axios.get('/fetchAllImages')
+        .then(response => {
+            console.log(response.data);
+
+            // Assuming the URLs of all images are returned in the 'imageUrls' field
+            imageUrls.value = response.data.imageUrls || [];
+        })
+        .catch(error => {
+            console.error(error);
+        });
+};
+
 const onPaginationChange = () => {
-    fetchRows();
+    getData();
 };
 
 const onFilterChange = () => {
     pagination.value.page = 1;
-    fetchRows();
+    getData();
 };
 
 const onFilterClick = () => {
     onFilterChange();
 };
 
-const onAddClick = () => {
-    // Implement logic to show a form or navigate to the add page
-    console.log('Add button clicked!');
-};
+
 
 watch(filter, onFilterChange);
 
 onMounted(() => {
-    fetchRows();
+    getData();
+    fetchAllImages();
+
 });
 
 const columns = [
@@ -224,3 +353,17 @@ const onDeleteClick = (name) => {
 };
 
 </script>
+
+
+<style scoped>
+.custom-file-label {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color:white;
+    background-color: rgb(97, 91, 91);
+    text-align: center;
+}
+
+
+</style>
