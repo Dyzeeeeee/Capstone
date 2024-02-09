@@ -1,17 +1,17 @@
 <template>
     <div class="q-pa-md">
-
         <div class="row items-center q-mb-md" style="display: flex; align-items: center;">
+
             <div class="col-4 q-pl-lg">
                 <q-breadcrumbs class="text-green-9">
                     <template v-slot:separator>
                         <q-icon size="1.5em" name="chevron_right" color="black" />
                     </template>
-
                     <q-breadcrumbs-el label="Restaurant" icon="home" class="text-black" />
                     <q-breadcrumbs-el label="Menu" icon="menu_book" />
                 </q-breadcrumbs>
             </div>
+
             <div class="col-8 row justify-end ">
                 <div class="col-auto ">
                     <q-btn @click="onFilterClick" flat color="primary" icon="filter_alt" />
@@ -24,7 +24,7 @@
                     </q-input>
                 </div>
                 <div class="col-auto ">
-                    <q-btn @click="onAddClick" flat color="primary" icon="add" label="Add" no-caps />
+                    <q-btn @click="openAddDialog" flat color="primary" icon="add" label="Add" no-caps />
                 </div>
                 <div class="col-auto ">
                     <q-btn flat color="secondary" icon="apps" />
@@ -49,11 +49,75 @@
                 @input="onPaginationChange" />
         </div>
     </div>
+
+
+    <q-dialog v-model="showAddDialog">
+        <q-card class="my-card">
+            <q-card-section>
+                <div class="text-h6 text-bold">Add Menu</div>
+            </q-card-section>
+
+            <q-separator />
+            <q-card-section class="q-pt-md ">
+                <q-form @submit="addMenu">
+                    <div class="q-gutter-md">
+                        <q-input dense v-model="newName" label="Name" required />
+                        <q-input dense v-model="newDescription" label="Description" required />
+                        <q-input dense v-model="newPrice" label="Price" required />
+                        <q-input dense v-model="newCategory" label="Category" required />
+
+                        <!-- Use q-uploader for image input -->
+                        <q-uploader v-model="newImage" label="Image" color="secondary" accept="image/*" @added="onFileAdded"   max-files="1"
+                            @failed="onFileFailed" class="q-mt-md" />
+                    </div>
+                    <q-separator />
+                    <q-card-actions align="right">
+                        <q-btn outline @click="closeAddDialog" color="negative" label="Cancel" no-caps style="width: 85px;"/>
+                        <q-btn outline type="submit" color="green" label="Confirm" no-caps style="width: 85px;" />
+                    </q-card-actions>
+                </q-form>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
+
+const showAddDialog = ref(false);
+const newItemName = ref('');
+const newItemDescription = ref('');
+const newItemPrice = ref('');
+const newItemCategory = ref('');
+const openAddDialog = () => {
+    showAddDialog.value = true;
+};
+
+const closeAddDialog = () => {
+    // Clear the form fields when closing the dialog
+    newItemName.value = '';
+    newItemDescription.value = '';
+    newItemPrice.value = '';
+    newItemCategory.value = '';
+
+    showAddDialog.value = false;
+};
+
+const addNewItem = () => {
+    // Implement logic to add the new item to the data source
+    // You can use newItemName, newItemDescription, newItemPrice, newItemCategory, etc.
+    console.log('Adding new item:', {
+        name: newItemName.value,
+        description: newItemDescription.value,
+        price: newItemPrice.value,
+        category: newItemCategory.value,
+    });
+
+    // Close the dialog
+    closeAddDialog();
+};
+
 
 const pagination = ref({
     sortBy: 'name',

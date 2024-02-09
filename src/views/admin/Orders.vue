@@ -59,6 +59,11 @@ const pagesNumber = computed(() => {
     return Math.ceil(filteredRows.value.length / pagination.value.rowsPerPage);
 });
 
+const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    return formattedDate;
+};
 
 const fetchRows = async () => {
     try {
@@ -107,12 +112,15 @@ const columns = [
         name: 'order_date',
         label: 'Order Date',
         field: 'order_date',
-        sortable: true
+        align: 'left',
+        sortable: true,
+        format: val => formatDate(val),
     },
     {
         name: 'total_order_price',
         label: 'Total Order Price',
         field: 'total_order_price',
+        align: 'left',
         sortable: true
     },
     {
