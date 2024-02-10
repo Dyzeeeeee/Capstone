@@ -44,14 +44,14 @@
             <template #body-cell-actions="props">
                 <q-td :props="props">
                     <q-btn @click="onEditClick(props.row.name)" flat round icon="edit_note" color="secondary" />
-                    <q-btn @click="onDeleteClick(props.row.name)" flat round icon="delete" color="negative" />
+                    <q-btn @click="onDeleteClick(props.row.name, props.row.id)" flat round icon="delete" color="negative" />
+
                 </q-td>
             </template>
             <!-- Custom slot for rendering the image in the 'image' column -->
             <template #body-cell-image="props">
                 <q-td :props="props">
-                    <img :src="props.row.image" alt="Menu Image"
-                        style="max-width: 100px; height: 70px; "/>
+                    <img :src="props.row.image" alt="Menu Image" style="max-width: 100px; height: 70px; " />
                 </q-td>
             </template>
         </q-table>
@@ -149,6 +149,9 @@ const data = ref({
     category: '',
     image: '',
 });
+
+
+
 
 const handleFileChange = (event) => {
     selectedFile.value = event.target.files[0];
@@ -347,9 +350,24 @@ const onEditClick = (name) => {
     console.log(`Edit button clicked for item: ${name}`);
 };
 
-const onDeleteClick = (name) => {
-    // Implement logic for deleting the item
-    console.log(`Delete button clicked for item: ${name}`);
+const onDeleteClick = async (name, id) => {
+    try {
+        const confirmDelete = confirm(`Are you sure you want to delete ${name}?`);
+        if (!confirmDelete) return;
+
+        // Make an API call to delete the record
+        await axios.delete(`menu/deleteData/${id}`);
+
+        // Fetch the updated data after deletion
+        const response = await axios.get('menu/getData');
+
+        // Update the table data
+        tableData.value = response.data;
+
+        console.log(`Deleted item: ${name}`);
+    } catch (error) {
+        console.error('Error deleting menu:', error);
+    }
 };
 
 </script>
@@ -360,10 +378,8 @@ const onDeleteClick = (name) => {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
-    color:white;
+    color: white;
     background-color: rgb(97, 91, 91);
     text-align: center;
 }
-
-
 </style>
