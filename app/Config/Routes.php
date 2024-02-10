@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('menu/getData', 'MenuController::getData');
 $routes->post('menu/addData', 'MenuController::addData');
+$routes->delete('menu/deleteData/(:num)', 'MenuController::deleteData/$1');
 $routes->post('menu/uploadImage', 'MenuController::uploadImage');
 $routes->get('fetchAllImages', 'MenuController::fetchAllImages');
 // $routes->post('menu/uploadImage', 'MenuController::uploadImage');

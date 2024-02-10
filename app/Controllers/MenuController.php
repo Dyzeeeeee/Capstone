@@ -17,6 +17,14 @@ class MenuController extends ResourceController
         //
     }
 
+    public function deleteData($id)
+{
+    $menu = new MenuModel();
+    $r = $menu->delete($id);
+
+    return $this->respondDeleted();
+}
+
     public function getData()
     {
         $menu = new MenuModel();
@@ -71,4 +79,6 @@ class MenuController extends ResourceController
 
         return $this->response->setJSON(['imageUrls' => $imageUrls]);
     }
+
+    
 }
