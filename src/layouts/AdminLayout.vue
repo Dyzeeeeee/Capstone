@@ -1,6 +1,6 @@
 <template>
-    <div class="">
-        <q-layout view="hHh Lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders bg-blue-grey-2">
+
+        <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders bg-blue-grey-2">
             <q-header elevated :class="$q.dark.isActive ? 'bg-secondary' : 'bg-blue-grey-9'">
                 <q-toolbar>
                     <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -188,11 +188,10 @@
                 </div>
             </q-drawer>
 
-            <q-page-container>
+            <q-page-container style="height: 200;">
                 <router-view />
             </q-page-container>
         </q-layout>
-    </div>
 </template>
   
 <script>
@@ -232,3 +231,5 @@ export default {
     },
 }
 </script>
+
+

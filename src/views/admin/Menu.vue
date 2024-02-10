@@ -1,6 +1,7 @@
 <template>
     <div class="q-pa-md">
 
+
         <div class="row items-center q-mb-md" style="display: flex; align-items: center;">
             <!--Breacrumb Title-->
             <div class="col-4 q-pl-lg">
@@ -23,44 +24,81 @@
                 <div class="col-5 ">
                     <q-input borderless dense debounce="300" v-model="filter" placeholder="Search name">
                         <template v-slot:append>
-                            <q-icon name="search" />
+                            <q-icon v-if="filter" name="clear" @click="clearSearch" />
+                            <q-icon v-else name="search" />
                         </template>
                     </q-input>
                 </div>
                 <div class="col-auto ">
                     <q-btn @click="openAddDialog" flat color="primary" icon="add" label="Add" no-caps />
                 </div>
-                <div class="col-auto ">
-                    <q-btn flat color="secondary" icon="apps" />
-                    <q-btn flat color="secondary" icon="view_list" />
-                </div>
+
+                    <div class="col-auto ">
+                        <q-btn @click="switchToGridView" flat color="secondary" icon="apps"
+                            :class="{ 'selected': selectedView === 'grid' }" />
+                        <q-btn @click="switchToListView" flat color="secondary" icon="view_list"
+                            :class="{ 'selected': selectedView === 'list' }" />
+                    </div>
+
+
             </div>
             <!-- Actions-->
         </div>
 
         <!-- Table-->
-        <q-table flat bordered :rows="tableData" :columns="columns" row-key="name" v-model:pagination="pagination"
-            hide-pagination>
-            <template #body-cell-actions="props">
-                <q-td :props="props">
-                    <q-btn @click="onEditClick(props.row.name)" flat round icon="edit_note" color="secondary" />
-                    <q-btn @click="onDeleteClick(props.row.name, props.row.id)" flat round icon="delete" color="negative" />
-
-                </q-td>
-            </template>
-            <!-- Custom slot for rendering the image in the 'image' column -->
-            <template #body-cell-image="props">
-                <q-td :props="props">
-                    <img :src="props.row.image" alt="Menu Image" style="max-width: 100px; height: 70px; " />
-                </q-td>
-            </template>
-        </q-table>
-
-        <div class="row justify-center q-mt-md">
-            <q-pagination v-model="pagination.page" color="grey-8" :max="pagesNumber" size="sm"
-                @input="onPaginationChange" />
+        <div class="row justify-center q-mt-md ">
+            <q-pagination v-model="pagination.page" color="grey-8" :max="gridPagesNumber" size="sm"
+                @input="onPaginationChange" class="q-pb-lg" />
         </div>
-        <!-- Table-->
+        <div v-if="selectedView === 'list'">
+            <q-table flat bordered :rows="tableData" :columns="columns" row-key="name" v-model:pagination="pagination"
+                hide-pagination class="my-sticky-header-table">
+                <template #body-cell-actions="props">
+                    <q-td :props="props">
+                        <q-btn @click="onEditClick(props.row.name)" flat round icon="edit_note" color="secondary" />
+                        <q-btn @click="onDeleteClick(props.row.name, props.row.id)" flat round icon="delete"
+                            color="negative" />
+
+                    </q-td>
+                </template>
+                <!-- Custom slot for rendering the image in the 'image' column -->
+                <template #body-cell-image="props">
+                    <q-td :props="props">
+                        <img :src="props.row.image" alt="Menu Image" style="max-width: 100px; height: 70px; " />
+                    </q-td>
+                </template>
+            </q-table>
+        </div>
+        <!--Grid-->
+        <div v-else-if="selectedView === 'grid'" class="row scrollable q-gutter-sm justify-center items-start">
+
+            <q-card flat bordered v-for="item in paginatedGridData" :key="item.id" class="my-card items-start">
+
+                <q-img :src="item.image" height="100px" />
+                <q-btn :ripple="false" fab-mini dense flat color="" icon="info" class="absolute"
+                    style="top: 0px; left: 0px;" />
+                <q-card-section>
+
+                    <div class="row items-center">
+                        <div class="col-12 text-subtitle1 text-bold">
+                            {{ item.name }}
+                        </div>
+                        <div class="text-subtitle1 col-12">
+                            {{ item.price }}
+                        </div>
+                        <div class="text-caption text-grey ellipsis">
+                            {{ item.description }}
+                        </div>
+                    </div>
+
+                </q-card-section>
+                <q-card-actions align="right">
+                    <q-btn @click="onEditClick(item.name)" flat round icon="edit_note" color="secondary" />
+                    <q-btn @click="onDeleteClick(item.name, item.id)" flat round icon="delete" color="negative" />
+                </q-card-actions>
+            </q-card>
+        </div>
+
 
     </div>
 
@@ -136,11 +174,32 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
 
+const gridPagesNumber = computed(() => {
+    return Math.ceil(tableData.value.length / pagination.value.rowsPerPage);
+});
+
+const selectedView = ref('list'); // Default to grid view
+
+const switchToGridView = () => {
+    selectedView.value = 'grid';
+};
+
+const switchToListView = () => {
+    selectedView.value = 'list';
+};
+
+const paginatedGridData = computed(() => {
+    const startIndex = (pagination.value.page - 1) * pagination.value.rowsPerPage;
+    const endIndex = startIndex + pagination.value.rowsPerPage;
+    return tableData.value.slice(startIndex, endIndex);
+});
+
 const showAddDialog = ref(false);
 const showFilterDialog = ref(false);
 const selectedFile = ref(null);
 const imagePreview = ref(null);
 const imageUrls = ref([]);
+
 
 const data = ref({
     name: '',
@@ -151,7 +210,9 @@ const data = ref({
 });
 
 
-
+const clearSearch = () => {
+    filter.value = '';
+};
 
 const handleFileChange = (event) => {
     selectedFile.value = event.target.files[0];
@@ -192,7 +253,7 @@ const pagination = ref({
     sortBy: 'name',
     descending: false,
     page: 1,
-    rowsPerPage: 10
+    rowsPerPage: 15
 });
 
 
@@ -373,7 +434,38 @@ const onDeleteClick = async (name, id) => {
 </script>
 
 
-<style scoped>
+<style>
+.my-sticky-header-table {
+    height: 75vh;
+}
+
+.my-sticky-header-table .q-table__top,
+.my-sticky-header-table .q-table__bottom,
+.my-sticky-header-table thead tr:first-child th {
+    background-color: #75a4b9;
+    color: white;
+    /* Set header text color to white */
+    font-weight: bold;
+    /* Set header text to bold */
+}
+
+.my-sticky-header-table thead tr th {
+    position: sticky;
+    z-index: 1;
+}
+
+.my-sticky-header-table thead tr:first-child th {
+    top: 0;
+}
+
+.my-sticky-header-table.q-table--loading thead tr:last-child th {
+    top: 48px;
+}
+
+.my-sticky-header-table tbody {
+    scroll-margin-top: 48px;
+}
+
 .custom-file-label {
     display: inline-block;
     padding: 6px 12px;
@@ -381,5 +473,34 @@ const onDeleteClick = async (name, id) => {
     color: white;
     background-color: rgb(97, 91, 91);
     text-align: center;
+}
+
+my-list-view .q-table__row {
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* .my-grid-view .q-table__row {
+    display: flex;
+    margin-bottom: 0;
+} */
+
+.my-card {
+    max-height: 300px;
+    width: 100%;
+    max-width: 250px;
+    /* Set the maximum width of your cards */
+}
+
+.scrollable {
+    overflow: auto;
+    height: 75vh;
+}
+
+.selected {
+    background-color: #75a4b9;
+    /* Add your selected background color */
+    color: white !important;
+    /* Add your selected text color */
 }
 </style>
