@@ -18,12 +18,12 @@ class MenuController extends ResourceController
     }
 
     public function deleteData($id)
-{
-    $menu = new MenuModel();
-    $r = $menu->delete($id);
+    {
+        $menu = new MenuModel();
+        $r = $menu->delete($id);
 
-    return $this->respondDeleted();
-}
+        return $this->respondDeleted();
+    }
 
     public function getData()
     {
@@ -45,7 +45,7 @@ class MenuController extends ResourceController
             'description' => $json->description,
             'price' => $json->price,
             'category' => $json->category,
-            'image' =>'http://capstone.test/Backend/public/uploads/'. $json->image,
+            'image' => 'http://capstone.test/Backend/public/uploads/' . $json->image,
         ];
 
         // Check if the 'image' field exists in the uploaded files
@@ -80,5 +80,21 @@ class MenuController extends ResourceController
         return $this->response->setJSON(['imageUrls' => $imageUrls]);
     }
 
-    
+    public function updateData($id)
+    {
+        $json = $this->request->getJSON();
+
+        $data = [
+            'name' => $json->name,
+            'description' => $json->description,
+            'price' => $json->price,
+            'category' => $json->category,
+            'image' => 'http://capstone.test/Backend/public/uploads/' . $json->image,
+        ];
+
+        $menu = new MenuModel();
+        $menu->update($id, $data);
+
+        return $this->respond($data, 200);
+    }
 }
