@@ -1,4 +1,25 @@
 <template>
+    <div>
+        <li>
+            Update data dialog should be able to preview and upload new image
+        </li>
+        <li>
+            Filter dialog still does not work
+        </li>
+        <li>
+            Category should be a dropdown, not type. <br>
+            -Also, there should be an add categ if it exists not  
+        </li>
+        <li>
+            Mas magandang delete warning
+        </li>
+        <li>
+            Breadcrumb might be changed for the better hahahhaha
+        </li>
+        <li>
+            Dialog form validations
+        </li>
+    </div>
     <div class="q-pa-md">
 
 
@@ -22,10 +43,10 @@
                     <q-btn @click="openFilterDialog" flat color="primary" icon="filter_alt" />
                 </div>
                 <div class="col-5 ">
-                    <q-input borderless dense debounce="300" v-model="filter" placeholder="Search name">
+                    <q-input borderless outlined dense debounce="300" v-model="filter" placeholder="Search name">
                         <template v-slot:append>
                             <q-icon v-if="filter" name="clear" @click="clearSearch" />
-                            <q-icon v-else name="search" />
+                            <q-icon v-else name="search" color="primary" />
                         </template>
                     </q-input>
                 </div>
@@ -33,12 +54,12 @@
                     <q-btn @click="openAddDialog" flat color="primary" icon="add" label="Add" no-caps />
                 </div>
 
-                    <div class="col-auto ">
-                        <q-btn @click="switchToGridView" flat color="secondary" icon="apps"
-                            :class="{ 'selected': selectedView === 'grid' }" />
-                        <q-btn @click="switchToListView" flat color="secondary" icon="view_list"
-                            :class="{ 'selected': selectedView === 'list' }" />
-                    </div>
+                <div class="col-auto ">
+                    <q-btn @click="switchToGridView" flat color="secondary" icon="apps"
+                        :class="{ 'selected': selectedView === 'grid' }" />
+                    <q-btn @click="switchToListView" flat color="secondary" icon="view_list"
+                        :class="{ 'selected': selectedView === 'list' }" />
+                </div>
 
 
             </div>
@@ -58,9 +79,9 @@
                         <q-btn @click="onEditClick(props.row.name)" flat round icon="edit_note" color="secondary" />
                         <q-btn @click="onDeleteClick(props.row.name, props.row.id)" flat round icon="delete"
                             color="negative" />
-
                     </q-td>
                 </template>
+
                 <!-- Custom slot for rendering the image in the 'image' column -->
                 <template #body-cell-image="props">
                     <q-td :props="props">
@@ -156,7 +177,6 @@
                             </div>
                         </div>
                         <q-input dense v-model="newCategory" label="Category" required />
-                        <q-input dense v-model="newCategory" label="Label" required />
                     </div>
                     <q-separator />
                     <q-card-actions align="right">
@@ -168,6 +188,41 @@
         </q-card>
     </q-dialog>
     <!-- Dialog-->
+    <!-- Edit Dialog -->
+    <q-dialog v-model="showEditDialog">
+        <q-card class="my-card" style="width: 400px;">
+            <q-card-section>
+                <div class="text-h6 text-bold">Edit Menu</div>
+            </q-card-section>
+            <q-separator />
+            <q-card-section class="q-pt-md ">
+                <div class="q-gutter-md">
+                    <!-- Similar input fields as the Add Dialog -->
+                    <q-input dense v-model="data.name" label="Name" required />
+                    <q-input dense v-model="data.description" label="Description" required />
+                    <q-input dense v-model="data.price" label="Price" required />
+                    <q-input dense v-model="data.category" label="Category" required />
+
+                    <!-- Add an input field to display the current image -->
+                    <!-- Add an input field to display the current image -->
+                    <label for="imageInput" class="custom-file-label">{{ data.image ? data.image : 'Add Image' }}</label>
+                    <input type="file" id="imageInput" @change="editHandleFileChange"
+                        style="display: none; width: 400px;" />
+                    <div v-if="data.image" class="row justify-center">
+                        <img :src="data.image" alt="Current Image" style="max-width: 200px" />
+                    </div>
+
+
+                </div>
+                <q-separator />
+                <q-card-actions align="right">
+                    <q-btn outline @click="closeDialog" color="negative" label="Cancel" no-caps style="width: 85px;" />
+                    <q-btn outline @click="updateData" color="green" label="Update" no-caps style="width: 85px;" />
+                </q-card-actions>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
+    <!-- Edit Dialog -->
 </template>
 
 <script setup>
@@ -194,6 +249,9 @@ const paginatedGridData = computed(() => {
     return tableData.value.slice(startIndex, endIndex);
 });
 
+
+
+
 const showAddDialog = ref(false);
 const showFilterDialog = ref(false);
 const selectedFile = ref(null);
@@ -215,9 +273,29 @@ const clearSearch = () => {
 };
 
 const handleFileChange = (event) => {
+    console.log("selected:", selectedFile.value);
     selectedFile.value = event.target.files[0];
     previewImage();
 };
+
+const editHandleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+        // Get only the name of the file
+        const fileName = selectedFile.name;
+
+        // Update the 'image' field in the data object with just the filename
+        data.value.image = fileName;
+
+        // Update imagePreview
+        previewImage();
+    }
+};
+
+
+
+
 
 const previewImage = () => {
     if (selectedFile.value) {
@@ -235,6 +313,8 @@ const openAddDialog = () => {
         description: '',
         price: '',
         category: '',
+        image: '',
+
     };
     showAddDialog.value = true;
 };
@@ -246,6 +326,7 @@ const openFilterDialog = () => {
 const closeDialog = () => {
     showAddDialog.value = false;
     showFilterDialog.value = false;
+    showEditDialog.value = false;
 };
 
 
@@ -321,6 +402,50 @@ const addData = async () => {
     }
 };
 
+const updateData = async () => {
+    try {
+        // Check if there's a new image to upload
+        if (selectedFile.value) {
+            // Upload the new image
+            const formData = new FormData();
+            formData.append('image', selectedFile.value);
+
+            // Replace '/uploadImage' with the actual URL of your CodeIgniter image upload endpoint
+            const uploadResponse = await axios.post('menu/uploadImage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            // Assuming the filename is returned in the 'message' field
+            const filename = uploadResponse.data.filename;
+            console.log('Image Filename:', filename);
+
+            // Update the 'image' field in the data object with the new filename
+            data.value.image = filename;
+        }
+
+        // Send a PUT request to update data
+        await axios.put(`menu/updateData/${data.value.id}`, data.value);
+
+        // Fetch the updated data after updating
+        const response = await axios.get('menu/getData');
+
+        // Update the table data
+        tableData.value = response.data;
+
+        // Close the edit modal
+        showEditDialog.value = false;
+
+        // Close the dialog
+        closeDialog();
+    } catch (error) {
+        console.error('Error updating menu:', error);
+        // Handle errors as needed
+    }
+};
+
+
 
 const fetchAllImages = () => {
     // Replace '/fetchAllImages' with the actual URL of your endpoint to fetch all images from the database
@@ -365,7 +490,6 @@ const columns = [
         label: 'Image', // Adjust label based on your model field
         field: 'image',
         align: 'center',
-        sortable: true
     },
     {
         name: 'name',
@@ -374,12 +498,6 @@ const columns = [
         align: 'left',
         field: row => row.name,
         format: val => `${val}`,
-        sortable: true
-    },
-    {
-        name: 'description',
-        label: 'Description', // Adjust label based on your model field
-        field: 'description',
         sortable: true
     },
     {
@@ -394,6 +512,12 @@ const columns = [
         field: 'category',
         sortable: true
     },
+    {
+        name: 'description',
+        label: 'Description', // Adjust label based on your model field
+        field: 'description',
+        sortable: true
+    },
     // Add other fields as needed
     {
         name: 'actions',
@@ -406,9 +530,29 @@ const columns = [
     },
 ];
 
+
+const openEditDialog = (name, id) => {
+    // Find the item in the tableData array based on the provided name
+    const selectedItem = tableData.value.find(item => item.name === name);
+
+    // Populate the editData object with the selected item's data
+    data.value = {
+        id: selectedItem.id,
+        name: selectedItem.name,
+        description: selectedItem.description,
+        price: selectedItem.price,
+        category: selectedItem.category,
+        image: selectedItem.image,
+    };
+
+    // Open the edit modal
+    showEditDialog.value = true;
+};
+
+const showEditDialog = ref(false);
+
 const onEditClick = (name) => {
-    // Implement logic for editing the item
-    console.log(`Edit button clicked for item: ${name}`);
+    openEditDialog(name);
 };
 
 const onDeleteClick = async (name, id) => {
@@ -471,7 +615,7 @@ const onDeleteClick = async (name, id) => {
     padding: 6px 12px;
     cursor: pointer;
     color: white;
-    background-color: rgb(97, 91, 91);
+    background-color: #75a4b9;
     text-align: center;
 }
 
@@ -481,9 +625,9 @@ my-list-view .q-table__row {
 }
 
 /* .my-grid-view .q-table__row {
-    display: flex;
-    margin-bottom: 0;
-} */
+        display: flex;
+        margin-bottom: 0;
+    } */
 
 .my-card {
     max-height: 300px;

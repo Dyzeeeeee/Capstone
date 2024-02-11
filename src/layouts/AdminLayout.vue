@@ -7,9 +7,10 @@
                     <q-toolbar-title>Anahaw Island View Resort</q-toolbar-title>
                     <div class="q-gutter-lg">
                         <q-btn flat dense icon="search" />
-                        <q-btn flat dense icon="chat" />
+                        <q-btn flat dense icon="chat_bubble" />
                         <q-btn flat dense icon="notifications" />
                         <q-btn flat dense icon="storefront" />
+                        <q-btn flat dense icon="settings" />
                         <q-btn flat dense :icon="fullScreen ? 'fullscreen_exit' : 'fullscreen'" @click="toggleFullScreen" />
                     </div>
 
@@ -153,7 +154,7 @@
                                 </q-item-section>
 
                                 <q-item-section>
-                                    Reservation
+                                    Reservations
                                 </q-item-section>
                             </q-item>
                         </router-link>
@@ -196,6 +197,7 @@
   
 <script>
 import { ref } from 'vue'
+
 
 export default {
     setup() {

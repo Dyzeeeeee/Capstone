@@ -9,7 +9,10 @@ const routes = [
       },
       { path: "menu", component: () => import("../views/admin/Menu.vue") },
       { path: "stocks", component: () => import("../views/admin/Stocks.vue") },
-      { path: "counter", component: () => import("../views/admin/Counter.vue") },
+      {
+        path: "counter",
+        component: () => import("../views/admin/Counter.vue"),
+      },
       { path: "Orders", component: () => import("../views/admin/Orders.vue") },
     ],
   },
@@ -21,6 +24,16 @@ const routes = [
   {
     path: "/register",
     component: () => import("../views/auth/RegisterView.vue"),
+  },
+  {
+    path: "/website",
+    component: () => import("@/layouts/WebsiteLayout.vue"),
+    children: [
+      {
+        path: "home",
+        component: () => import("@/views/website/Home.vue"),
+      },
+    ],
   },
 ];
 
