@@ -80,12 +80,5 @@ export default {
 
 
 <style scoped>
-@media (max-width: 1000px) {
 
-    /* Styles for screens with a width of 768 pixels or less */
-    .container-xxl {
-        width: 100%;
-        /* Adjust as needed */
-    }
-}
 </style>

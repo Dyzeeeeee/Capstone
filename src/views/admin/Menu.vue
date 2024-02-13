@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <!-- <div>
         <li>
             Update data dialog should be able to preview and upload new image
         </li>
@@ -19,7 +19,7 @@
         <li>
             Dialog form validations
         </li>
-    </div>
+    </div> -->
     <div class="q-pa-md">
 
 
