@@ -46,9 +46,9 @@
               <q-img :src="props.row.image" style="max-width: 50px; max-height: 50px;" />
             </q-td>
           </template>
-          <template #body-cell-actions="props">
+          <template #body-cell-name="props">
             <q-td :props="props">
-              <q-btn round icon="add" color="secondary" />
+              <div class="text-bold">{{ props.row.name }}</div>
             </q-td>
           </template>
         </q-table>
@@ -61,8 +61,9 @@
           <q-img :src="menuItem.image" height="100px" />
           <q-btn :ripple="false" fab-mini dense flat color="" icon="info" class="absolute" style="top: 0px; left: 0px;" />
           <q-card-section>
-            <q-btn fab-mini dense color="secondary" icon="add" class="absolute"
-              style="top: 0; right: 12px; transform: translateY(-50%);" />
+            <q-btn :ripple="false" fab-mini dense color="secondary" icon="add" class="absolute"
+              style="top: 0; right: 12px; transform: translateY(-50%);" @click="addToReceipt(menuItem)">
+            </q-btn>
             <div class="row items-center">
               <div class="col-12 text-subtitle1 text-bold">{{ menuItem.name }}</div>
               <div class="text-subtitle1 col-12">{{ menuItem.price }}</div>
@@ -73,17 +74,67 @@
       </div>
     </div>
     <div class="col-5">
-      <div class="receipt">
-        <div class="receipt-header">
-          <h2>Receipt</h2>
+
+      <div class="row q-mb-lg justify-center q-mx-md ">
+        <q-btn color="primary" outline icon="person_add" rounded no-caps class="q-mx-sm">
+          <div class="text-bold q-pl-sm">
+            Customer
+          </div>
+        </q-btn>
+        <q-btn color="secondary" outline icon="note_add" rounded no-caps class="q-mx-sm">
+          <div class="text-bold q-pl-sm">
+            Add Note
+          </div>
+        </q-btn> <q-btn color="secondary" outline icon="add" rounded no-caps class="q-mx-sm">
+          <div class="text-bold q-pl-sm">
+            New Order
+          </div>
+        </q-btn>
+      </div>
+
+      <div class="bg-white q-mx-lg receipt-container" style="height: 71vh; display: flex; flex-direction: column;">
+        <div class="q-pa-sm text-h6  text-bold receipt-header">
+          Order No: 100
+          <div class="text-subtitle1">
+            Cashier: John Doe
+          </div>
+
         </div>
-        <div class="receipt-body">
-          <!-- Add receipt content here -->
+        <div class="receipt-body" style="flex: 1; overflow-y: auto;">
+          <q-table :rows="aggregatedReceiptItems" :columns="receiptColumns" row-key="id" hide-bottom
+            :pagination.sync="pagination" class="">
+            <template #body-cell-quantity="props">
+              <q-td :props="props">{{ props.row.quantity }}</q-td>
+            </template>
+            <template #body-cell-name="props">
+              <q-td :props="props">{{ props.row.name }}</q-td>
+            </template>
+            <template #body-cell-subtotal="props">
+              <q-td :props="props">{{ props.row.price * props.row.quantity }}</q-td>
+            </template>
+            <template #body-cell-action="props">
+              <q-td :props="props">
+                <q-btn flat round icon="remove_circle_outline" color="secondary" />
+                <q-btn flat round icon="cancel" color="negative" />
+              </q-td>
+            </template>
+          </q-table>
+
         </div>
-        <div class="receipt-footer">
-          
+
+        <div class="receipt-footer q-pa-sm text-subtitle1">
+          Note: Sample Note
+        </div>
+        <div class="receipt-footer q-pa-sm text-subtitle1">
+          Customer: Jane Doe
         </div>
       </div>
+
+      <div class="row q-mt-sm justify-end q-mx-md ">
+        <q-btn color="primary" icon="format_list_numbered_rtl" label="All Orders" no-caps class="q-mx-sm" />
+        <q-btn color="green" icon-right="chevron_right" no-caps label="Payment" class="q-mx-sm" />
+      </div>
+
     </div>
   </div>
 </template>
@@ -92,13 +143,35 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
+
 const filter = ref('');
 const menuData = ref([]);
-const pagination = ref({ page: 1, rowsPerPage: 15 });
-const selectedView = ref('list'); // Default to list view
+const pagination = ref({ page: 1, rowsPerPage: 100 });
+const selectedView = ref('grid'); // Default to list view
+
+const receiptColumns = [
+  { name: 'quantity', label: 'Quantity', align: 'left', field: 'quantity', sortable: true },
+  { name: 'name', label: 'Name', align: 'left', field: 'name', sortable: true },
+  { name: 'subtotal', label: 'Subtotal', align: 'left', field: 'total', sortable: true },
+  { name: 'action', label: 'Action', align: 'left', field: 'total', sortable: true },
+];
 
 const switchToGridView = () => {
   selectedView.value = 'grid';
+};
+const aggregatedReceiptItems = ref([]); // New ref to store aggregated items
+
+const addToReceipt = (item) => {
+  // Check if the item is already in the receipt
+  const existingItem = aggregatedReceiptItems.value.find((ri) => ri.id === item.id);
+
+  if (existingItem) {
+    // If the item is already in the receipt, increment the quantity
+    existingItem.quantity += 1;
+  } else {
+    // If the item is not in the receipt, add it with a quantity of 1
+    aggregatedReceiptItems.value.push({ ...item, quantity: 1 });
+  }
 };
 
 const switchToListView = () => {
@@ -111,15 +184,7 @@ const columns = [
   { name: 'name', label: 'Name', align: 'left', field: 'name', sortable: true },
   { name: 'price', label: 'Price', align: 'left', field: 'price', sortable: true },
   { name: 'description', label: 'Description', align: 'left', field: 'description', sortable: true },
-  {
-    name: 'actions',
-    label: 'Action',
-    field: 'actions',
-    align: 'center',
-    sortable: false,
-    // Custom slot for rendering buttons
-    bodySlot: 'actions',
-  },
+
 ];
 
 const getData = async () => {
