@@ -14,7 +14,8 @@
                     </q-card-section>
                     <q-card-section>
                         <q-btn style="border-radius: 8px;" color="green" rounded size="md" label="Sign in" no-caps
-                            class="full-width"></q-btn>
+                            class="full-width" @click="loginUser"></q-btn>
+
                     </q-card-section>
                     <q-card-section class="text-center q-pt-none">
                         <div class="text-grey-8">Don't have an account yet?
@@ -38,5 +39,46 @@
 }
 </style>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+
+
+const router = useRouter();
+
+const email = ref('');
+const password = ref('');
+
+const loginUser = async () => {
+    // Validate input data (add your validation logic)
+
+    // Prepare data for login
+    const userData = {
+        email: email.value,
+        password: password.value,
+    };
+
+    try {
+        // Send login data to the server using Axios
+        const response = await axios.post('/login', userData);
+
+        // Check the response and handle accordingly
+        if (response.data.success) {
+            // Login successful
+            console.log(response.data.message);
+
+            // Redirect to another route (change '/dashboard' to the desired route)
+            router.push('/website/home');
+        } else {
+            // Login failed
+            console.error(response.data.message);
+            // You may want to show an error message to the user
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        // Handle error (e.g., show an error message to the user)
+    }
+};
 </script>

@@ -16,6 +16,16 @@ const routes = [
       { path: "Orders", component: () => import("../views/admin/Orders.vue") },
     ],
   },
+  {
+    path: "/employee",
+    component: () => import("@/layouts/EmployeeLayout.vue"),
+    children: [
+      {
+        path: "dashboard",
+        component: () => import("@/views/admin/Dashboard.vue"),
+      },
+    ],
+  },
 
   {
     path: "/login",
