@@ -11,6 +11,11 @@ $routes->post('menu/addData', 'MenuController::addData');
 $routes->delete('menu/deleteData/(:num)', 'MenuController::deleteData/$1');
 $routes->put('menu/updateData/(:num)', 'MenuController::updateData/$1');
 
+$routes->post('register', 'RegisterController::register');
+$routes->post('login', 'LoginController::login');
+
+
+
 $routes->post('menu/uploadImage', 'MenuController::uploadImage');
 $routes->get('fetchAllImages', 'MenuController::fetchAllImages');
 // $routes->post('menu/uploadImage', 'MenuController::uploadImage');
