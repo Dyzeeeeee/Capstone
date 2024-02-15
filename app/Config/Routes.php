@@ -14,6 +14,9 @@ $routes->put('menu/updateData/(:num)', 'MenuController::updateData/$1');
 $routes->post('register', 'RegisterController::register');
 $routes->post('login', 'LoginController::login');
 
+$routes->post('session/new', 'SessionController::newSession');
+$routes->get('session/getSessions', 'SessionController::getSessions');
+
 
 
 $routes->post('menu/uploadImage', 'MenuController::uploadImage');
