@@ -38,7 +38,7 @@
                             </q-item-section>
                         </q-item>
                         <q-separator spaced />
-                        <router-link to="/admin/dashboard" style="  text-decoration: none; color: inherit;">
+                        <router-link to="/employee/dashboard" style="  text-decoration: none; color: inherit;">
 
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
@@ -49,55 +49,10 @@
                                 </q-item-section>
                             </q-item>
                         </router-link>
-                        <q-item-label header>Restaurant</q-item-label>
-                        <router-link to="/admin/menu" style="  text-decoration: none; color: inherit;">
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="menu_book" />
-                                </q-item-section>
-                                <q-item-section>
-                                    Menu
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
 
-                        <router-link to="/admin/recipe" style="  text-decoration: none; color: inherit;">
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="lunch_dining" />
-                                </q-item-section>
-                                <q-item-section>
-                                    Recipe
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
-
-                        <q-item-label header>Inventory</q-item-label>
-                        <router-link to="/admin/stocks" style="  text-decoration: none; color: inherit;">
-
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="inventory" />
-                                </q-item-section>
-
-                                <q-item-section>
-                                    Stocks
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
-
-                        <q-item clickable v-ripple>
-                            <q-item-section avatar>
-                                <q-icon name="store" />
-                            </q-item-section>
-
-                            <q-item-section>
-                                Suppliers
-                            </q-item-section>
-                        </q-item>
 
                         <q-item-label header>Point of Sale</q-item-label>
-                        <router-link to="/admin/counter" style="  text-decoration: none; color: inherit;">
+                        <router-link to="/employee/counter" style="  text-decoration: none; color: inherit;">
 
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
@@ -110,18 +65,6 @@
                             </q-item>
                         </router-link>
 
-                        <router-link to="/admin/orders" style="  text-decoration: none; color: inherit;">
-
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="receipt_long" />
-                                </q-item-section>
-
-                                <q-item-section>
-                                    Orders
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
 
                         <q-item clickable v-ripple>
                             <q-item-section avatar>
@@ -134,19 +77,7 @@
                         </q-item>
 
                         <q-item-label header>Room</q-item-label>
-                        <router-link to="/admin/counter" style="  text-decoration: none; color: inherit;">
-
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="night_shelter" />
-                                </q-item-section>
-
-                                <q-item-section>
-                                    Rooms
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
-                        <router-link to="/admin/counter" style="  text-decoration: none; color: inherit;">
+                        <router-link to="/employee/counter" style="  text-decoration: none; color: inherit;">
 
                             <q-item clickable v-ripple>
                                 <q-item-section avatar>
@@ -161,20 +92,7 @@
 
 
 
-                        <q-item-label header>Accounts</q-item-label>
 
-                        <router-link to="/admin/employee" style="  text-decoration: none; color: inherit;">
-
-                            <q-item clickable v-ripple>
-                                <q-item-section avatar>
-                                    <q-icon name="badge" />
-                                </q-item-section>
-
-                                <q-item-section>
-                                    Employee
-                                </q-item-section>
-                            </q-item>
-                        </router-link>
 
                     </q-list>
                 </q-scroll-area>

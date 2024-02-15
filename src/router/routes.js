@@ -22,7 +22,15 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        component: () => import("@/views/admin/Dashboard.vue"),
+        component: () => import("@/views/employee/Dashboard.vue"),
+      },
+      {
+        path: "session/:id",
+        component: () => import("../views/employee/Session.vue"),
+      },
+      {
+        path: "counter",
+        component: () => import("../views/employee/Counter.vue"),
       },
     ],
   },
