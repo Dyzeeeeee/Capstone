@@ -52,4 +52,36 @@ class SessionController extends ResourceController
             return $this->respond(['message' => 'No sessions found.'], 404);
         }
     }
+
+    public function endSession($id)
+    {
+        // Validate $id (ensure it's a valid session ID)
+
+        // Assuming you have the 'status' and 'end_time' in the request JSON
+        $json = $this->request->getJSON();
+
+        $timezone = new \DateTimeZone('Asia/Manila'); // Replace with your actual time zone
+        $now = new \DateTime('now', $timezone);
+
+        $data = [
+            'status' => $json->status, // Set the status to 'closed'
+            'end_time' => $now->format('Y-m-d H:i:s'),
+        ];
+
+        $sessionModel = new SessionModel();
+        $session = $sessionModel->find($id);
+
+        if (!$session) {
+            return $this->fail('Session not found', 404);
+        }
+
+        // Update the session with the provided data
+        $r = $sessionModel->update($id, $data);
+
+        if ($r) {
+            return $this->respond(['message' => 'Session ended successfully'], 200);
+        } else {
+            return $this->fail($sessionModel->errors(), 400);
+        }
+    }
 }

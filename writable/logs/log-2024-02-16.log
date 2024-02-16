@@ -1,0 +1,429 @@
+CRITICAL - 2024-02-16 09:17:39 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:42 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:43 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:43 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:43 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:43 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:44 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:44 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:17:44 --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (Philippines/Manila)
+in APPPATH\Controllers\SessionController.php on line 63.
+ 1 APPPATH\Controllers\SessionController.php(63): DateTimeZone->__construct('Philippines/Manila')
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\SessionController->endSession('7')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SessionController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:58:48 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 68.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:58:49 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 68.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:58:58 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 68.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 09:59:54 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 70.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:00:35 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 70.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:01:09 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 70.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:01:10 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 70.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:04:30 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:04:32 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:04:32 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:04:33 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:04:44 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:05:56 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:05:56 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:05:57 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:06:40 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:06:40 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:06:41 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:06:42 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 10:06:48 --> Error: Attempt to assign property "total_order_price" on array
+in APPPATH\Controllers\OrderController.php on line 77.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('152')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:17 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:18 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:19 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:33 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:33 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:39:34 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:41:57 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:41:57 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:41:58 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `orders` SET `total_order_price` = :total_order_price:
+WHERE `orders`.`id` IN :orders.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(393): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(987): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(807): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\OrderController.php(68): CodeIgniter\Model->update('151', [...])
+10 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:14 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:21 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:22 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:22 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:28 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:28 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:29 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:29 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:29 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:42 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:43 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-16 14:44:43 --> ErrorException: Undefined property: stdClass::$totalOrderPrice
+in APPPATH\Controllers\OrderController.php on line 65.
+ 1 APPPATH\Controllers\OrderController.php(65): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$totalOrderPrice', 'C:\\laragon\\www\\Capstone\\Backend\\app\\Controllers\\OrderController.php', 65)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\OrderController->updateTotalOrderPrice('151')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()

@@ -16,6 +16,7 @@ $routes->post('login', 'LoginController::login');
 
 $routes->post('session/new', 'SessionController::newSession');
 $routes->get('session/getSessions', 'SessionController::getSessions');
+$routes->post('session/end/(:num)', 'SessionController::endSession/$1'); // Add this line
 
 
 
@@ -25,4 +26,7 @@ $routes->get('fetchAllImages', 'MenuController::fetchAllImages');
 
 $routes->get('stocks/getData', 'StockController::getData');
 $routes->get('orders/getData', 'OrderController::getData');
-
+$routes->post('orders/addData', 'OrderController::addData');
+$routes->get('orders/getLatestOrderId', 'OrderController::getLatestOrderId');
+$routes->put('orders/updateTotalOrderPrice/(:num)', 'OrderController::updateTotalOrderPrice/$1');
+    

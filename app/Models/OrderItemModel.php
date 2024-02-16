@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SessionModel extends Model
+class OrderItemModel extends Model
 {
-    protected $table            = 'sessions';
+    protected $table            = 'order_items';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [ 'cashier_id', 'start_time', 'end_time', 'status', 'opening_cash'];
+    protected $allowedFields    = ['order_id', 'menu_item', 'quantity', 'subtotal'];
 
     protected bool $allowEmptyInserts = false;
 
