@@ -27,6 +27,12 @@
             </template>
           </q-input>
         </div>
+        <div class="col-auto q-mx-sm">
+          <q-btn @click="switchToGridView" flat color="secondary" icon="apps"
+            :class="{ 'selected': selectedView === 'grid', 'my-selected-button': selectedView === 'grid' }" />
+          <q-btn @click="switchToListView" flat color="secondary" icon="view_list"
+            :class="{ 'selected': selectedView === 'list', 'my-selected-button': selectedView === 'list' }" />
+        </div>
 
 
         <div class="col-auto ">
@@ -46,19 +52,24 @@
       <!-- Check if there are sessions to display -->
       <div v-if="sessions.length > 0" class="row q-gutter-md">
         <!-- Loop through sessions and render a card for each -->
-        <div v-for="session in sessions" :key="session.id" class="col-2">
-          <q-card class="my-card">
+        <div v-for="session in sessions" :key="session.id" class="col-auto">
+          <q-card class="session-card">
             <q-card-section>
-              <div class="text-h6 text-bold">{{ formatStartTime(session.start_time) }}</div>
-              <div class="text-subtitle1 text-uppercase text-green">{{ session.status }}</div>
+              <div class="text-h6 text-bold">Cashier Name</div>
+              <div class="text-subtitle1">{{ formatDate(session.start_time) }}</div>
+              <div class="text-subtitle2 text-italic">{{ formatTime(session.start_time) }}</div>
+              <!-- Apply dynamic class based on session status -->
+              <div :class="session.status === 'open' ? 'text-subtitle2 text-green' : 'text-subtitle2 text-red'">
+                {{ session.status }}
+              </div>
             </q-card-section>
 
             <!-- Additional sections or data as needed -->
 
             <q-card-actions align="right" class="q-gutter-sm">
               <!-- Button to view details or navigate to a specific page -->
-              <q-btn @click="" flat color="negative" icon-right="cancel" no-caps />
-              <q-btn @click="viewSessionDetails(session.id)" color="secondary" label="Continue" outline no-caps />
+              <q-btn @click="endSession(session.id)" flat color="negative" icon-right="stop" no-caps />
+              <q-btn @click="viewSessionDetails(session.id)" color="secondary" icon-right="fast_forward" flat no-caps />
             </q-card-actions>
           </q-card>
         </div>
@@ -123,24 +134,46 @@ const getSessionsData = async () => {
     console.error('Error fetching sessions data:', error);
   }
 };
-const formatStartTime = (startTime) => {
-  const date = new Date(startTime);
+const formatDate = (dateTimeString) => {
+  const date = new Date(dateTimeString);
   const options = {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+  };
+  return date.toLocaleDateString('en-US', options);
+};
+
+const formatTime = (dateTimeString) => {
+  const date = new Date(dateTimeString);
+  const options = {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
   };
-  return date.toLocaleDateString('en-US', options);
+  return date.toLocaleTimeString('en-US', options);
 };
+
 
 onMounted(() => {
   // Fetch sessions data when the component is mounted
   getSessionsData();
 });
 
+const endSession = async (sessionId) => {
+  try {
+    const response = await axios.post(`/session/end/${sessionId}`, {
+      status: 'Closed',
+    });
+
+    console.log('Session ended:', response.data);
+
+    // Optionally, you can update the sessions data after ending the session
+    getSessionsData();
+  } catch (error) {
+    console.error('Error ending session:', error);
+  }
+};
 
 const router = useRouter();
 
@@ -160,23 +193,41 @@ const closeDialog = () => {
 };
 const startNewSession = async () => {
   try {
-    const response = await axios.post('/session/new', {
+    // Step 1: Create a new session
+    const sessionResponse = await axios.post('/session/new', {
       status: 'open',
       opening_cash: openingCash.value,
     });
 
-    console.log('Response:', response.data);
+    console.log('Session Response:', sessionResponse.data);
 
-    const createdSessionId = response.data.id;
+    const createdSessionId = sessionResponse.data.id;
     console.log('Created Session ID:', createdSessionId);
 
+    // Step 2: Create a new order associated with the session
+    const orderResponse = await axios.post('/orders/addData', {
+      session_id: createdSessionId,
+      total_order_price: 0, // You can set the total_order_price based on your needs
+    });
+
+    // Check the actual response structure from the server
+    const createdOrderId = orderResponse.data.id; // Adjust based on your server response
+
+    console.log('Created Order ID:', createdOrderId);
+
+    // Step 3: Redirect to the new session or do any other necessary actions
     router.push(`/employee/session/${createdSessionId}`);
 
-    showNewSessionDialog.value = false; // Close the dialog
+    // Optionally, you can update the UI or perform other actions
+
+    // Step 4: Close the dialog
+    showNewSessionDialog.value = false;
   } catch (error) {
     console.error('Error:', error);
   }
 };
+
+
 
 const viewSessionDetails = (sessionId) => {
   // You can implement the logic to navigate to the details page or show a modal
@@ -185,3 +236,8 @@ const viewSessionDetails = (sessionId) => {
 };
 </script>
 
+<style >
+.session-card {
+  width: 200px;
+}
+</style>
