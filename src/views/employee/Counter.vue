@@ -204,16 +204,6 @@ const startNewSession = async () => {
     const createdSessionId = sessionResponse.data.id;
     console.log('Created Session ID:', createdSessionId);
 
-    // Step 2: Create a new order associated with the session
-    const orderResponse = await axios.post('/orders/addData', {
-      session_id: createdSessionId,
-      total_order_price: 0, // You can set the total_order_price based on your needs
-    });
-
-    // Check the actual response structure from the server
-    const createdOrderId = orderResponse.data.id; // Adjust based on your server response
-
-    console.log('Created Order ID:', createdOrderId);
 
     // Step 3: Redirect to the new session or do any other necessary actions
     router.push(`/employee/session/${createdSessionId}`);

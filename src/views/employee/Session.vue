@@ -62,7 +62,7 @@
           <q-btn :ripple="false" fab-mini dense flat color="" icon="info" class="absolute" style="top: 0px; left: 0px;" />
           <q-card-section>
             <q-btn :ripple="false" fab-mini dense color="secondary" icon="add" class="absolute"
-              style="top: 0; right: 12px; transform: translateY(-50%);" @click="addToReceipt(menuItem)">
+              style="top: 0; right: 12px; transform: translateY(-50%);" @click="addOrder(menuItem)">
             </q-btn>
             <div class="row items-center">
               <div class="col-12 text-subtitle1 text-bold">{{ menuItem.name }}</div>
@@ -85,7 +85,7 @@
           <div class="text-bold q-pl-sm">
             Add Note
           </div>
-        </q-btn> <q-btn color="secondary" outline icon="add" rounded no-caps class="q-mx-sm">
+        </q-btn> <q-btn color="secondary" outline icon="add" rounded no-caps class="q-mx-sm" @click="newOrder">
           <div class="text-bold q-pl-sm">
             New Order
           </div>
@@ -94,39 +94,36 @@
 
       <div class="bg-white q-mx-lg receipt-container" style="height: 71vh; display: flex; flex-direction: column;">
         <div class="q-pa-sm text-h6  receipt-header">
-          <b>Order No:&nbsp</b> {{ latestOrderId || 'OrderId' }}
-
-
+          <b>Order No:&nbsp</b> {{ orderId }}
         </div>
         <div class="receipt-body" style="flex: 1; overflow-y: auto;">
-          <q-table :rows="aggregatedReceiptItems" :columns="receiptColumns" row-key="id" hide-bottom
-            :pagination.sync="pagination" class="receipt-table" flat bordered="">
+          <q-table :rows="ReceiptItems" :columns="receiptColumns" row-key="id" hide-bottom :pagination.sync="pagination"
+            class="receipt-table" flat bordered="">
             <template #body-cell-quantity="props">
               <q-td :props="props">{{ props.row.quantity }}</q-td>
             </template>
-            <template #body-cell-name="props">
-              <q-td :props="props">{{ props.row.name }}</q-td>
+            <template #body-cell-menu_item="props">
+              <q-td :props="props">{{ props.row.menu_item }}</q-td>
             </template>
             <template #body-cell-subtotal="props">
-              <q-td :props="props">{{ props.row.price * props.row.quantity }}</q-td>
+              <q-td :props="props">{{ props.row.subtotal }}</q-td>
             </template>
             <template #body-cell-action="props">
               <q-td :props="props">
-                <q-btn flat round icon="remove_circle_outline" color="secondary"
-                  @click="subtractFromReceipt(props.row)" />
-                <q-btn flat round icon="cancel" color="negative" @click="removeFromReceipt(props.row)" />
+                <q-btn flat round icon="remove_circle_outline" color="secondary" @click="reduceOrder(props.row)" />
+                <q-btn flat round icon="cancel" color="negative" @click="removeOrder(props.row)" />
               </q-td>
             </template>
           </q-table>
 
         </div>
         <q-separator />
-        <div class="q-pa-sm text-subtitle1 justify-end row  ">
-          <b> Total: &nbsp</b>Php {{ calculateTotalPrice() }}.00
+        <div class=" q-pa-sm text-subtitle1 justify-end row ">
+          <b> Total: &nbsp</b>Php {{ totalOrderPrice }}
         </div>
         <q-separator />
 
-        <div class="q-px-sm text-subtitle1">
+        <div class=" q-px-sm text-subtitle1">
           <b>Note:&nbsp</b> Sample Note
         </div>
         <div class="text-subtitle1  q-px-sm">
@@ -137,14 +134,29 @@
         </div>
       </div>
 
-      <div class="row q-mt-sm  q-mx-md ">
-        <div class="col-4  q-ml-md">
+      <!-- <div class="bg-white q-mx-lg order-list" style="height: 71vh; display: flex; flex-direction: column;">
+        <div class="q-pa-sm text-h6 text-white" style="background-color:#75a4b9;">
+          All Orders {{ orderId }}
+        </div>
+        <div class="order-body" style="flex: 1; overflow-y: auto;">
+          <q-table :rows="orderList" :columns="orderColumns" row-key="id" hide-bottom :pagination.sync="pagination"
+            class="order-table" flat bordered="">
+          </q-table>
+        </div>
+      </div> -->
+
+      <div class="row q-mt-sm ">
+        <div class="col-3  q-ml-md">
           Register Cash
         </div>
         <q-space></q-space>
         <div class="col-auto ">
-          <q-btn color="primary" icon="format_list_numbered_rtl" label="All Orders" no-caps class="q-mx-sm" />
-          <q-btn color="green" icon-right="chevron_right" no-caps label="Payment" class="q-mx-sm" />
+          <q-btn color="primary" icon="format_list_numbered_rtl" label="All Orders" no-caps class="q-mx-sm">
+            <q-badge color="orange" rounded floating>{{ badgeCount }}</q-badge>
+          </q-btn>
+
+          <q-btn color="green" icon="account_balance_wallet" icon-right="chevron_right" no-caps label="Payment"
+            class="q-mx-sm" />
         </div>
       </div>
 
@@ -155,19 +167,38 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useRoute } from 'vue-router';
 
+const badgeCount = ref(0);
 
+const totalOrderPrice = ref(0);
 const filter = ref('');
 const menuData = ref([]);
-const pagination = ref({ page: 1, rowsPerPage: 100 });
-const selectedView = ref('grid'); // Default to list view
-const latestOrderId = ref(null);
+const orderId = ref('');
+const orderItems = ref({
+  order_id: orderId,
+  menu_item: '',
+  quantity: '',
+  subtotal: '',
+});
 
+const pagination = ref({ page: 1, rowsPerPage: 100 });
+const selectedView = ref('grid');
+const route = useRoute(); // Use useRoute to access the current route information
 
 const receiptColumns = [
   { name: 'quantity', label: 'Quantity', align: 'center', field: 'quantity', sortable: true },
-  { name: 'name', label: 'Name', align: 'center', field: 'name', sortable: true },
-  { name: 'subtotal', label: 'Subtotal', align: 'center', field: 'total', sortable: true },
+  { name: 'menu_item', label: 'Name', align: 'center', field: 'menu_item', sortable: true },
+  { name: 'subtotal', label: 'Subtotal', align: 'center', field: 'subtotal', sortable: true },
+  { name: 'action', label: 'Action', align: 'center', field: 'total', sortable: true },
+];
+
+const orderColumns = [
+  { name: 'id', label: 'Order ID', align: 'center', field: 'id', sortable: true },
+  { name: 'customer', label: 'Customer', align: 'center', field: 'customer_id', sortable: true },
+  { name: 'date', label: 'Date', align: 'center', field: 'order_date', sortable: true },
+  { name: 'total', label: 'Total', align: 'center', field: 'total_order_price', sortable: true },
+  { name: 'status', label: 'Status', align: 'center', field: 'status', sortable: true },
   { name: 'action', label: 'Action', align: 'center', field: 'total', sortable: true },
 ];
 
@@ -175,63 +206,20 @@ const switchToGridView = () => {
   selectedView.value = 'grid';
 };
 
-const aggregatedReceiptItems = ref([]); // New ref to store aggregated items
-
-const addToReceipt = (item) => {
-  const existingItem = aggregatedReceiptItems.value.find((ri) => ri.id === item.id);
-
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    aggregatedReceiptItems.value.push({ ...item, quantity: 1 });
-  }
-
-  updateOrderTotalPrice(); // Update total price after adding an item
-};
-
-
-const removeFromReceipt = (item) => {
-  const index = aggregatedReceiptItems.value.findIndex((ri) => ri.id === item.id);
-
-  if (index !== -1) {
-    aggregatedReceiptItems.value.splice(index, 1);
-    updateOrderTotalPrice(); // Update total price after removing an item
-  }
-};
 const switchToListView = () => {
   selectedView.value = 'list';
 };
 
-const getLatestOrderId = async () => {
+const getOrderData = async () => {
   try {
-    const response = await axios.get('orders/getLatestOrderId');
-    latestOrderId.value = response.data.id;
+    const response = await axios.get(`orders/getOrderData/${orderId.value}`);
+    const orderData = response.data.data; // Assuming the order data is in the 'data' key
+
+    // Update totalOrderPrice with the received total_order_price
+    totalOrderPrice.value = orderData.total_order_price;
   } catch (error) {
-    console.error('Error fetching latest order ID:', error);
+    console.error('Error fetching order data:', error);
   }
-};
-
-const subtractFromReceipt = (item) => {
-  const existingItem = aggregatedReceiptItems.value.find((ri) => ri.id === item.id);
-
-  if (existingItem) {
-    if (existingItem.quantity > 1) {
-      existingItem.quantity -= 1;
-    } else {
-      // Remove the item if the quantity is 1 or less
-      const index = aggregatedReceiptItems.value.findIndex((ri) => ri.id === item.id);
-      if (index !== -1) {
-        aggregatedReceiptItems.value.splice(index, 1);
-      }
-    }
-    updateOrderTotalPrice(); // Update total price after subtracting an item
-  }
-};
-
-const calculateTotalPrice = () => {
-  return aggregatedReceiptItems.value.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
 };
 
 const getData = async () => {
@@ -243,29 +231,125 @@ const getData = async () => {
   }
 };
 
-const updateOrderTotalPrice = async () => {
+
+const newOrder = async () => {
+
+  const sessionId = route.params.id;
+
+  const response = await axios.post('orders/addData', { session_id: sessionId });
+  orderId.value = response.data;
+  updateBadgeCount(route.params.id);
+  getOrderItems(); // Fetch order items
+  getOrderData();
+}
+
+const addOrder = async (menuItem) => {
   try {
-    const totalOrderPrice = calculateTotalPrice();
-    const orderId = latestOrderId.value; // Assuming latestOrderId is available in your component
 
-    await axios.put(`orders/updateTotalOrderPrice/${orderId}`, {
-      totalOrderPrice: totalOrderPrice,
-    });
+    if (orderId.value == 0) {
+      // Extract session_id from the route parameters
+      const sessionId = route.params.id;
 
-    console.log('Total order price updated successfully.');
+      const response = await axios.post('orders/addData', { session_id: sessionId });
+      orderId.value = response.data;
+      addItemToOrder(menuItem);
+      updateBadgeCount(route.params.id);
+      getOrderData();
+      // getOrderItems();
+    } else {
+
+      addItemToOrder(menuItem);
+    }
   } catch (error) {
-    console.error('Error updating total order price:', error);
+    console.error('Error adding order:', error);
+  }
+}
+
+const addItemToOrder = async (menuItem) => {
+
+  const orderItemData = {
+    order_id: orderId.value,
+    menu_item: menuItem.name, // Replace with actual menu item ID
+    subtotal: menuItem.price, // Replace with the actual subtotal
+  };
+  await axios.post('orders/addItemToOrder', orderItemData);
+  getOrderItems();
+  getOrderData();
+
+}
+const reduceOrder = async (orderItem) => {
+  try {
+    const updatedQuantity = orderItem.quantity - 1;
+
+    // Ensure the quantity doesn't go below 0
+    if (updatedQuantity >= 0) {
+      const updatedSubtotal = updatedQuantity * orderItem.menu_item.price;
+
+      // Call your backend API to update the order item quantity and subtotal
+      await axios.put(`orders/updateOrderItem/${orderItem.id}`, {
+        quantity: updatedQuantity,
+        subtotal: updatedSubtotal,
+      });
+
+      getOrderItems(); // Refresh order items after the update
+      getOrderData();
+
+    }
+  } catch (error) {
+    console.error('Error reducing order:', error);
   }
 };
 
 
+const removeOrder = async (orderItem) => {
+  try {
+    // Call your backend API to delete the order item
+    await axios.delete(`orders/deleteOrderItem/${orderItem.id}`);
+    getOrderItems(); // Refresh order items after the deletion
+    getOrderData();
 
-
+  } catch (error) {
+    console.error('Error removing order:', error);
+  }
+};
 onMounted(() => {
-  getData(); // Fetch menu data
-  getLatestOrderId(); // Fetch latest order ID
+  getData();
+  getOrderItems(); // Fetch order items
+  getOrderData();
+  updateBadgeCount(route.params.id);
+  newOrder();
+
+
 });
+const getOrderItems = async () => {
+  try {
+    if (orderId.value) {
+      const response = await axios.get(`orders/getOrderItems/${orderId.value}`);
+      ReceiptItems.value = response.data;
+    }
+  } catch (error) {
+    console.error('Error fetching order items:', error);
+  }
+};
+const ReceiptItems = ref([]);
+
+const updateBadgeCount = async (sessionId) => {
+  try {
+    const response = await axios.get(`orders/getOrderCount/${sessionId}`);
+    const orderCount = response.data.count;
+    // Update the badge count
+    if ((orderId.value == 0)) {
+      badgeCount.value = orderCount;
+    } else {
+      badgeCount.value = orderCount - 1;
+    }
+  } catch (error) {
+    console.error('Error updating badge count:', error);
+  }
+};
 </script>
+
+
   
 <style>
 .my-sticky-header-table {
