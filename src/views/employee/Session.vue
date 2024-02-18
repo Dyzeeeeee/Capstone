@@ -156,7 +156,7 @@
           </q-btn>
 
           <q-btn color="green" icon="account_balance_wallet" icon-right="chevron_right" no-caps label="Payment"
-            class="q-mx-sm" />
+            class="q-mx-sm" @click="goToPayment" />
         </div>
       </div>
 
@@ -230,7 +230,13 @@ const getData = async () => {
     console.error('Error fetching menu data:', error);
   }
 };
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
+const goToPayment = async () => {
+      router.push(`/employee/payment/${orderId.value}`);
+
+}
 
 const newOrder = async () => {
 

@@ -32,11 +32,15 @@ const routes = [
         path: "counter",
         component: () => import("../views/employee/Counter.vue"),
       },
+      {
+        path: "payment/:id",
+        component: () => import("../views/employee/Payment.vue"),
+      },
     ],
   },
 
   {
-    path: "/login",
+    Path: "/login",
     component: () => import("../views/auth/LoginView.vue"),
   },
   {
