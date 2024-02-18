@@ -27,6 +27,10 @@ $routes->get('fetchAllImages', 'MenuController::fetchAllImages');
 $routes->get('stocks/getData', 'StockController::getData');
 $routes->get('orders/getData', 'OrderController::getData');
 $routes->post('orders/addData', 'OrderController::addData');
-$routes->get('orders/getLatestOrderId', 'OrderController::getLatestOrderId');
-$routes->put('orders/updateTotalOrderPrice/(:num)', 'OrderController::updateTotalOrderPrice/$1');
-    
+$routes->post('orders/addItemToOrder', 'OrderController::addItemToOrder');
+$routes->put('orders/updateOrderItem/(:num)', 'OrderController::updateOrderItem/$1'); // Add this line
+$routes->get('orders/getOrderItems/(:num)', 'OrderController::getOrderItems/$1');
+$routes->put('orders/updateOrderItem/(:num)', 'OrderController::updateOrderItem/$1');
+$routes->delete('orders/deleteOrderItem/(:num)', 'OrderController::deleteOrderItem/$1');
+$routes->get('orders/getOrderData/(:num)', 'OrderController::getOrderData/$1');
+$routes->get('orders/getOrderCount/(:segment)', 'OrderController::getOrderCount/$1');
