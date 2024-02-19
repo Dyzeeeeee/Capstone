@@ -5,7 +5,6 @@ namespace App\Controllers;
 use CodeIgniter\RestFul\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\MenuModel;
-use App\Models\ImageModel;
 
 
 class MenuController extends ResourceController
@@ -97,4 +96,13 @@ class MenuController extends ResourceController
 
         return $this->respond($data, 200);
     }
+
+    public function getCategories()
+    {
+        $menu = new MenuModel();
+        $categories = $menu->distinct()->select('category')->findAll();
+
+        return $this->respond($categories, 200);
+    }
+    
 }

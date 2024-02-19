@@ -475,3 +475,15 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
 10 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
 11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 12 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 12:28:37 --> Error: Call to a member function isValid() on null
+in APPPATH\Controllers\MenuController.php on line 62.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->uploadImage()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-19 12:28:44 --> Error: Call to a member function isValid() on null
+in APPPATH\Controllers\MenuController.php on line 62.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->uploadImage()
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(88): CodeIgniter\CodeIgniter->run()
