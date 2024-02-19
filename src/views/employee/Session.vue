@@ -92,7 +92,9 @@
         </q-btn>
       </div>
 
-      <div class="bg-white q-mx-lg receipt-container" style="height: 71vh; display: flex; flex-direction: column;">
+      <!--Receipt-->
+      <div v-if="!showOrderList" class="bg-white q-mx-lg receipt-container"
+        style="height: 71vh; display: flex; flex-direction: column;">
         <div class="q-pa-sm text-h6  receipt-header">
           <b>Order No:&nbsp</b> {{ orderId }}
         </div>
@@ -115,14 +117,12 @@
               </q-td>
             </template>
           </q-table>
-
         </div>
         <q-separator />
         <div class=" q-pa-sm text-subtitle1 justify-end row ">
           <b> Total: &nbsp</b>Php {{ totalOrderPrice }}
         </div>
         <q-separator />
-
         <div class=" q-px-sm text-subtitle1">
           <b>Note:&nbsp</b> Sample Note
         </div>
@@ -133,17 +133,42 @@
           <b>Customer:&nbsp</b> Jane Doe
         </div>
       </div>
+      <!--Receipt-->
 
-      <!-- <div class="bg-white q-mx-lg order-list" style="height: 71vh; display: flex; flex-direction: column;">
-        <div class="q-pa-sm text-h6 text-white" style="background-color:#75a4b9;">
-          All Orders {{ orderId }}
+      <!--order list-->
+      <!--order list-->
+      <div v-if="showOrderList" class="bg-white q-mx-lg order-list"
+        style="height: 71vh; display: flex; flex-direction: column;">
+        <div class="row q-pa-sm text-h6 text-white" style="background-color:#75a4b9;">
+          <div class="col-auto">
+            All Orders
+          </div>
+          <q-space></q-space>
+          <div class="col-auto">
+            <q-input borderless outlined dense debounce="300" v-model="filter" placeholder="Search order"
+              class="bg-white">
+              <template v-slot:append>
+                <q-icon v-if="filter" color="white" name="clear" @click="clearSearch" />
+                <q-icon v-else name="search" color="blue" />
+              </template>
+            </q-input>
+          </div>
         </div>
         <div class="order-body" style="flex: 1; overflow-y: auto;">
           <q-table :rows="orderList" :columns="orderColumns" row-key="id" hide-bottom :pagination.sync="pagination"
             class="order-table" flat bordered="">
+            <template #body-cell-action="props">
+              <q-td :props="props">
+                <q-btn flat round icon="delete" color="negative" @click="deleteOrder(props.row.id)" />
+                <q-btn flat round icon="visibility" color="secondary" @click="viewOrderDetails(props.row.id)" />
+              </q-td>
+            </template>
           </q-table>
         </div>
-      </div> -->
+      </div>
+      <!--order list-->
+
+      <!--order list-->
 
       <div class="row q-mt-sm ">
         <div class="col-3  q-ml-md">
@@ -151,8 +176,11 @@
         </div>
         <q-space></q-space>
         <div class="col-auto ">
-          <q-btn color="primary" icon="format_list_numbered_rtl" label="All Orders" no-caps class="q-mx-sm">
-            <q-badge color="orange" rounded floating>{{ badgeCount }}</q-badge>
+          <q-btn color="primary" icon="format_list_numbered_rtl" label="All Orders" no-caps class="q-mx-sm"
+            @click="showAllOrders">
+            <template v-if="badgeCount >= 1">
+              <q-badge color="orange" rounded floating>{{ badgeCount }}</q-badge>
+            </template>
           </q-btn>
 
           <q-btn color="green" icon="account_balance_wallet" icon-right="chevron_right" no-caps label="Payment"
@@ -170,6 +198,8 @@ import axios from 'axios';
 import { useRoute } from 'vue-router';
 
 const badgeCount = ref(0);
+const showOrderList = ref(false);
+const orderList = ref([]);
 
 const totalOrderPrice = ref(0);
 const filter = ref('');
@@ -181,6 +211,24 @@ const orderItems = ref({
   quantity: '',
   subtotal: '',
 });
+
+const deleteOrder = async (orderId) => {
+  try {
+    const confirmDelete = confirm(`Are you sure you want to delete Order No: ${orderId}?`);
+    if (!confirmDelete) return;
+    // Call your backend API to delete the order
+    await axios.delete(`/orders/deleteOrder/${orderId}`);
+    // Optionally, you can update the orderList or perform any other necessary actions
+    updateBadgeCount(route.params.id);
+    const sessionId = route.params.id;
+    const response = await axios.get(`/orders/getDataBySession/${sessionId}`);
+    getOrderItems();
+    getOrderData();
+    orderList.value = response.data;
+  } catch (error) {
+    console.error('Error deleting order:', error);
+  }
+};
 
 const pagination = ref({ page: 1, rowsPerPage: 100 });
 const selectedView = ref('grid');
@@ -195,8 +243,6 @@ const receiptColumns = [
 
 const orderColumns = [
   { name: 'id', label: 'Order ID', align: 'center', field: 'id', sortable: true },
-  { name: 'customer', label: 'Customer', align: 'center', field: 'customer_id', sortable: true },
-  { name: 'date', label: 'Date', align: 'center', field: 'order_date', sortable: true },
   { name: 'total', label: 'Total', align: 'center', field: 'total_order_price', sortable: true },
   { name: 'status', label: 'Status', align: 'center', field: 'status', sortable: true },
   { name: 'action', label: 'Action', align: 'center', field: 'total', sortable: true },
@@ -204,6 +250,17 @@ const orderColumns = [
 
 const switchToGridView = () => {
   selectedView.value = 'grid';
+};
+const showAllOrders = async () => {
+  try {
+
+    const sessionId = route.params.id;
+    const response = await axios.get(`/orders/getDataBySession/${sessionId}`);
+    orderList.value = response.data;
+    showOrderList.value = !showOrderList.value;
+  } catch (error) {
+    console.error('Error fetching all orders:', error);
+  }
 };
 
 const switchToListView = () => {
@@ -234,7 +291,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const goToPayment = async () => {
-      router.push(`/employee/payment/${orderId.value}`);
+  router.push(`/employee/payment/${orderId.value}`);
 
 }
 
@@ -252,7 +309,7 @@ const newOrder = async () => {
 const addOrder = async (menuItem) => {
   try {
 
-    if (orderId.value == 0) {
+    if (orderId.value == 0 || orderId.value == null) {
       // Extract session_id from the route parameters
       const sessionId = route.params.id;
 
