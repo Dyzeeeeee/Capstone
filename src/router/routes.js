@@ -55,6 +55,10 @@ const routes = [
         path: "home",
         component: () => import("@/views/website/Home.vue"),
       },
+      {
+        path: "about",
+        component: () => import("@/views/website/About.vue"),
+      },
     ],
   },
 ];
