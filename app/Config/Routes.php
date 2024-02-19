@@ -32,5 +32,7 @@ $routes->put('orders/updateOrderItem/(:num)', 'OrderController::updateOrderItem/
 $routes->get('orders/getOrderItems/(:num)', 'OrderController::getOrderItems/$1');
 $routes->put('orders/updateOrderItem/(:num)', 'OrderController::updateOrderItem/$1');
 $routes->delete('orders/deleteOrderItem/(:num)', 'OrderController::deleteOrderItem/$1');
+$routes->delete('orders/deleteOrder/(:num)', 'OrderController::deleteOrder/$1');
 $routes->get('orders/getOrderData/(:num)', 'OrderController::getOrderData/$1');
 $routes->get('orders/getOrderCount/(:segment)', 'OrderController::getOrderCount/$1');
+$routes->get('orders/getDataBySession/(:segment)', 'OrderController::getDataBySession/$1');

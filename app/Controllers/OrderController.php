@@ -20,17 +20,33 @@ class OrderController extends ResourceController
         $data = $order->findAll();
         return $this->respond($data, 200);
     }
+    public function getDataBySession($sessionId)
+    {
+        $order = new OrderModel();
 
+        // Fetch orders based on $sessionId
+        $orders = $order->where('session_id', $sessionId)->findAll();
+
+        return $this->respond($orders); // Adjust this according to your response format
+    }
+
+    public function deleteOrder($id)
+    {
+        $order = new OrderModel();
+        $r = $order->delete($id);
+
+        return $this->respondDeleted();
+    }
     // Add this method to your OrderController
-public function getOrderCount($sessionId)
-{
-    $orderModel = new OrderModel();
+    public function getOrderCount($sessionId)
+    {
+        $orderModel = new OrderModel();
 
-    // Fetch the count of orders with the specified session_id
-    $orderCount = $orderModel->where('session_id', $sessionId)->countAllResults();
+        // Fetch the count of orders with the specified session_id
+        $orderCount = $orderModel->where('session_id', $sessionId)->countAllResults();
 
-    return $this->respond(['count' => $orderCount], 200);
-}
+        return $this->respond(['count' => $orderCount], 200);
+    }
 
     public function getOrderData($id)
     {
