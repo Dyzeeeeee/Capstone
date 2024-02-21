@@ -38,3 +38,4 @@ $routes->delete('orders/deleteOrder/(:num)', 'OrderController::deleteOrder/$1');
 $routes->get('orders/getOrderData/(:num)', 'OrderController::getOrderData/$1');
 $routes->get('orders/getOrderCount/(:segment)', 'OrderController::getOrderCount/$1');
 $routes->get('orders/getDataBySession/(:segment)', 'OrderController::getDataBySession/$1');
+$routes->post('order/addPayment/(:num)', 'OrderController::addPayment/$1');

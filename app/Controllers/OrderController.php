@@ -214,4 +214,19 @@ class OrderController extends ResourceController
             return $this->respond(['status' => 'not_found'], 404);
         }
     }
+
+    public function addPayment($id)
+    {
+        $json = $this->request->getJSON();
+
+        // Update the 'tendered', 'change1', and 'status' fields in the 'orders' table
+        $orderModel = new OrderModel();
+        $orderModel->update($id, [
+            'tendered' => $json->tendered,
+            'change1'  => $json->change1,
+            'status'   => $json->status,
+        ]);
+
+        return $this->respond(['status' => 'success', 'id' => $id], 200);
+    }
 }
