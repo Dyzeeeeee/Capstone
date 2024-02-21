@@ -73,19 +73,20 @@
         </q-card>
       </div>
     </div>
+    
     <div class="col-5">
 
       <div class="row q-mb-lg justify-center q-mx-md ">
-        <q-btn color="primary" outline icon="person_add" rounded no-caps class="q-mx-sm">
+        <q-btn color="primary" icon="person_add" rounded no-caps class="q-mx-sm">
           <div class="text-bold q-pl-sm">
             Customer
           </div>
         </q-btn>
-        <q-btn color="secondary" outline icon="note_add" rounded no-caps class="q-mx-sm">
+        <q-btn color="secondary" icon="note_add" rounded no-caps class="q-mx-sm">
           <div class="text-bold q-pl-sm">
             Add Note
           </div>
-        </q-btn> <q-btn color="secondary" outline icon="add" rounded no-caps class="q-mx-sm" @click="newOrder">
+        </q-btn> <q-btn color="secondary" icon="add" rounded no-caps class="q-mx-sm" @click="newOrder">
           <div class="text-bold q-pl-sm">
             New Order
           </div>
@@ -127,7 +128,7 @@
           <b>Note:&nbsp</b> Sample Note
         </div>
         <div class="text-subtitle1  q-px-sm">
-          <b>Cashier:&nbsp</b> John Doe
+          <b>Cashier:w</b> John Doe
         </div>
         <div class="q-px-sm text-subtitle1">
           <b>Customer:&nbsp</b> Jane Doe
@@ -159,8 +160,8 @@
             class="order-table" flat bordered="">
             <template #body-cell-action="props">
               <q-td :props="props">
-                <q-btn flat round icon="delete" color="negative" @click="deleteOrder(props.row.id)" />
-                <q-btn flat round icon="visibility" color="secondary" @click="viewOrderDetails(props.row.id)" />
+                <q-btn flat round icon="cancel" color="negative" @click="deleteOrder(props.row.id)" />
+                <q-btn flat round icon="double_arrow" color="secondary" @click="viewOrderDetails(props.row.id)" />
               </q-td>
             </template>
           </q-table>
@@ -212,12 +213,25 @@ const orderItems = ref({
   subtotal: '',
 });
 
-const deleteOrder = async (orderId) => {
+const deleteOrder = async (orderIdToDelete) => {
   try {
-    const confirmDelete = confirm(`Are you sure you want to delete Order No: ${orderId}?`);
-    if (!confirmDelete) return;
+    const confirmDelete = confirm(`Are you sure you want to delete Order No: ${orderIdToDelete}?`);
+
+    if (!confirmDelete) {
+      // If the user cancels the delete action or if the orderId is the same as the row being deleted, return without deleting.
+      return;
+    }
+    if (orderId.value == orderIdToDelete) {
+      // If the user cancels the delete action or if the orderId is the same as the row being deleted, return without deleting.
+
+      showOrderList.value = !showOrderList.value;
+      return;
+    }
+
+
     // Call your backend API to delete the order
-    await axios.delete(`/orders/deleteOrder/${orderId}`);
+    await axios.delete(`/orders/deleteOrder/${orderIdToDelete}`);
+
     // Optionally, you can update the orderList or perform any other necessary actions
     updateBadgeCount(route.params.id);
     const sessionId = route.params.id;
@@ -229,6 +243,7 @@ const deleteOrder = async (orderId) => {
     console.error('Error deleting order:', error);
   }
 };
+
 
 const pagination = ref({ page: 1, rowsPerPage: 100 });
 const selectedView = ref('grid');
@@ -258,6 +273,8 @@ const showAllOrders = async () => {
     const response = await axios.get(`/orders/getDataBySession/${sessionId}`);
     orderList.value = response.data;
     showOrderList.value = !showOrderList.value;
+    orderId.value = null;
+    ReceiptItems.value = [];
   } catch (error) {
     console.error('Error fetching all orders:', error);
   }
@@ -291,19 +308,33 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const goToPayment = async () => {
-  router.push(`/employee/payment/${orderId.value}`);
+  if (!orderId.value || totalOrderPrice.value <= 0) {
+    // Show a message to the user indicating that they cannot proceed to payment
+    console.log("Cannot proceed to payment with an empty or zero total order price.");
+    return;
+  }
 
+  router.push(`/employee/payment/${orderId.value}`);
 }
 
 const newOrder = async () => {
+  try {
+    const sessionId = route.params.id;
 
-  const sessionId = route.params.id;
-
-  const response = await axios.post('orders/addData', { session_id: sessionId });
-  orderId.value = response.data;
-  updateBadgeCount(route.params.id);
-  getOrderItems(); // Fetch order items
-  getOrderData();
+    // Check if the current order is empty or its total is 0.00
+    if (orderId.value && totalOrderPrice.value > 0) {
+      const response = await axios.post('orders/addData', { session_id: sessionId });
+      orderId.value = response.data;
+      updateBadgeCount(route.params.id);
+      getOrderItems(); // Fetch order items
+      getOrderData();
+    } else {
+      // Optionally, you can show a message to the user indicating that the order is empty or has a total of 0.00
+      console.log("Cannot create a new order with an empty or zero total order price.");
+    }
+  } catch (error) {
+    console.error('Error creating new order:', error);
+  }
 }
 
 const addOrder = async (menuItem) => {
@@ -318,6 +349,8 @@ const addOrder = async (menuItem) => {
       addItemToOrder(menuItem);
       updateBadgeCount(route.params.id);
       getOrderData();
+      showOrderList.value = false;
+
       // getOrderItems();
     } else {
 
@@ -375,12 +408,15 @@ const removeOrder = async (orderItem) => {
     console.error('Error removing order:', error);
   }
 };
-onMounted(() => {
+onMounted(async () => {
   getData();
   getOrderItems(); // Fetch order items
   getOrderData();
   updateBadgeCount(route.params.id);
-  newOrder();
+  showAllOrders();
+  // const sessionId = route.params.id;
+  // const response = await axios.post('orders/addData', { session_id: sessionId });
+  // orderId.value = response.data;
 
 
 });
@@ -410,6 +446,18 @@ const updateBadgeCount = async (sessionId) => {
     console.error('Error updating badge count:', error);
   }
 };
+
+const viewOrderDetails = (orderIds) => {
+  // Set the orderId to the selected order's id
+
+  orderId.value = orderIds;
+  getOrderItems(); // Fetch order items
+  getOrderData();
+  showOrderList.value = !showOrderList.value;
+
+
+};
+
 </script>
 
 

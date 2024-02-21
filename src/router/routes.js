@@ -36,6 +36,10 @@ const routes = [
         path: "payment/:id",
         component: () => import("../views/employee/Payment.vue"),
       },
+      {
+        path: "validated/:id",
+        component: () => import("../views/employee/Validated.vue"),
+      },
     ],
   },
 
