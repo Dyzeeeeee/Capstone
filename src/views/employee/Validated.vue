@@ -41,18 +41,57 @@
                         </q-input>
                     </div>
                     <div class="" style="margin-top: auto;">
-                      <q-btn color="green" style="width: 100%; height: 70px;" label="New Order" icon="grading" no-caps @click="newOrder"> 
+                        <q-btn color="green" style="width: 100%; height: 70px;" label="New Order" icon="grading" no-caps
+                            @click="newOrder">
 
-                      </q-btn>
+                        </q-btn>
                     </div>
                 </div>
 
-                
+
             </div>
             <div class="col-4 ">
-                <div class="bg-white q-ma-sm" style="height: 74vh">
-                    dasd
+                <div class="bg-white q-ma-sm receipt" style="height: 74vh">
+                    <div class="text-bold q-pt-md q-px-md row q-pb-sm  text-h6 justify-center">
+                        Anahaw
+                    </div>
+                    <div class=" q-px-md row  text-caption justify-center text-center">
+                        Anahaw Address, Calapan, Oriental Mindoro <br>
+                        (+63)900-000-0000 <br>
+                        AnahawEmail@email.com <br>
+                    </div>
+                    <q-separator></q-separator>
+                    <div class=" q-px-md row  text-caption justify-center text-center">
+                        Served by: Cashier Name
+                    </div>
+                    <div class="text-bold q-pt-md q-px-md row  text-subtitle2">
+                        Order Item <q-space></q-space>Subtotal
+                    </div>
+                    <div class="text-italic q-px-md text-caption">
+                        Quantity x Price
+                    </div>
+                    <div class="text-bold row  text-subtitle1">
+                        <div class="justify-center q-pa-md col-4 "></div>
+                        <div class="justify-center q-pa-md col-4 ">TOTAL: </div>
+                        <div class="justify-end text-right q-pa-md col-4">Total </div>
+                    </div>
+                    <div class="text-bold q-px-md row  text-subtitle2">
+                        Payment Method <q-space></q-space>Tendered
+                    </div>
+                    <div class="text-bold row  text-subtitle1 ">
+                        <div class="justify-center q-pa-md col-4 "></div>
+                        <div class="justify-center q-pa-md col-4 ">CHANGE: </div>
+                        <div class="text-right q-pa-md col-4">change </div>
+                    </div>
+                    <div class="text-bold q-px-md row  text-subtitle2">
+                        VAT <q-space></q-space>Vat %
+                    </div>
+                    <div class="justify-center row">
+                        QR siguro
+                    </div>
                 </div>
+
+
             </div>
         </div>
 
@@ -65,4 +104,10 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const newOrder = () => {
+    router.go(-2); // Go back two steps in the route history
+}
 </script>

@@ -440,7 +440,7 @@ const updateBadgeCount = async (sessionId) => {
     if ((orderId.value == 0)) {
       badgeCount.value = orderCount;
     } else {
-      badgeCount.value = orderCount - 1;
+      badgeCount.value = orderCount;
     }
   } catch (error) {
     console.error('Error updating badge count:', error);

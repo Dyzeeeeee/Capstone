@@ -230,10 +230,31 @@ const plusValue = (amount) => {
     }
 };
 
-const goToValidated = () => {
-    const validatedRoute = `/employee/validated/${orderId.value}`;
-    router.push(validatedRoute);
+const goToValidated = async () => {
+    if (totalDue.value <= 0) {
+        await addPayment(); // Call addPayment function to add payment information
+        const validatedRoute = `/employee/validated/${orderId.value}`;
+        router.push(validatedRoute);
+    }
 };
+
+const addPayment = async () => {
+    try {
+        const paymentData = {
+            tendered: tendered.value,
+            change1: Math.abs(totalDue.value), // Use Math.abs to get the absolute value
+            status: "Paid",
+        };
+
+        const response = await axios.put(`orders/addPayment/${orderId.value}`, paymentData);
+        console.log(response.data); // Log the response for debugging or handling if necessary
+    } catch (error) {
+        console.error('Error adding payment:', error);
+        // Handle error appropriately
+    }
+};
+
+
 
 const addValue = async (value) => {
     console.log("value clicked: ", value)
