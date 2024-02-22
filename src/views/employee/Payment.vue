@@ -214,6 +214,7 @@ import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
 
 const route = useRoute();
+
 const ReceiptItems = ref([]);
 const tendered = ref(0);
 const totalDue = computed(() => totalOrderPrice.value - tendered.value);
