@@ -1,5 +1,5 @@
 <template>
-    <div class="py-5 bg-darka page-title mb-5">
+    <div class="py- page-title mb-5">
 
 
         <div>
@@ -25,6 +25,11 @@
 
 import Service from '@/components/website/service.vue';
 import footer1 from '@/components/website/footer.vue';
+
+window.addEventListener('load', function() {
+        const pageTitle = document.querySelector('.page-title');
+        pageTitle.classList.add('slide-down');
+    });
 
 
 </script>

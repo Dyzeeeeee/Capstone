@@ -153,28 +153,44 @@
 
 /***/
 .page-title {
-    background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)),url(../img/resort3.jpg);
-    background-position: center center;
+    position: relative;
+    background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)), url(../img/resort3.jpg);
+    background-position: center 0; /* Start background at the top */
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
     background-attachment: fixed;
     width: 100%;
-    height: 820px;
+    height: 870px;
+    animation: slideDown 1.5s forwards;
+}
+@keyframes slideDown {
+    from {
+        background-position: center 0; /* Start background at the top */
+    }
+    to {
+        background-position: center 100%; /* Slide background to the bottom */
+    }
 }
 
-.title-transition {
-    color: #CCCCCC;
+.page-title h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #CCCCCC; /* Default text color */
     text-align: center;
-    margin-top: 300px;
-    opacity: 1;
-    transition: opacity 1s ease-in;
+    animation: fadeIn 1s forwards;
 }
 
-/* Apply the opacity when the text is visible */
-.title-transition.loaded {
-    margin-top: 300px;
-    opacity: 0;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
+
 
 /* .website-layout img {
     content: '';
@@ -190,10 +206,23 @@
 /*** Hero Header ***/
 .hero-header {
     background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)), url(../img/resort3.jpg);
-    background-position: center center;
+    background-position: center 0;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 870px;
+    animation: slideDown 1.5s forwards;
 }
+@keyframes slideDown {
+    from {
+        background-position: center 0; /* Start background at the top */
+    }
+    to {
+        background-position: center 100%; /* Slide background to the bottom */
+    }
+}
+
 
 .hero-header img {
     animation: imgRotate 50s linear infinite;
