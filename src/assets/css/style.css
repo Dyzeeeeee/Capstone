@@ -149,10 +149,47 @@
     }
 }
 
+/*** Websitelayout ***/
+
+/***/
+.page-title {
+    background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)),url(../img/resort3.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed;
+    width: 100%;
+    height: 820px;
+}
+
+.title-transition {
+    color: #CCCCCC;
+    text-align: center;
+    margin-top: 300px;
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+
+/* Apply the opacity when the text is visible */
+.title-transition.loaded {
+    margin-top: 300px;
+    opacity: 0;
+}
+
+/* .website-layout img {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+} */
+  /***/
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)), url(../img/resort.jpg);
+    background: linear-gradient(rgba(14, 0, 119, 0.9), rgba(14, 97, 7, 0.284)), url(../img/resort3.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -3,7 +3,7 @@
 
 
         <div>
-            <h1 class="title-transition">ABOUT</h1>
+            <h1 class="title-transition">SERVICES</h1>
         </div>
 
 
@@ -11,7 +11,7 @@
     </div>
     <div class="position-relative p-0 ">
 
-        <about />
+        <service />
 
         <footer1 />
 
@@ -23,7 +23,7 @@
 
 <script setup>
 
-import about from '@/components/website/about.vue';
+import Service from '@/components/website/service.vue';
 import footer1 from '@/components/website/footer.vue';
 
 

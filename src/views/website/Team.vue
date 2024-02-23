@@ -3,16 +3,15 @@
 
 
         <div>
-            <h1 class="title-transition">ABOUT</h1>
+            <h1 class="title-transition">OUR BANDS</h1>
         </div>
 
 
 
     </div>
-    <div class="position-relative p-0 ">
+    <div class="position-relative p-0">
 
-        <about />
-
+        <team />
         <footer1 />
 
     </div>
@@ -23,7 +22,7 @@
 
 <script setup>
 
-import about from '@/components/website/about.vue';
+import team from '@/components/website/team.vue';
 import footer1 from '@/components/website/footer.vue';
 
 

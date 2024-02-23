@@ -44,7 +44,7 @@ const routes = [
   },
 
   {
-    Path: "/login",
+    path: "/login",
     component: () => import("../views/auth/LoginView.vue"),
   },
   {
@@ -63,6 +63,26 @@ const routes = [
         path: "about",
         component: () => import("@/views/website/About.vue"),
       },
+      {
+        path: "service",
+        component: () => import("@/views/website/Service.vue"),
+      },
+      {
+        path: "menu",
+        component: () => import("@/views/website/Menu.vue"),
+      },
+      {
+        path: "booking",
+        component: () => import("@/views/website/Booking.vue"),
+      },
+      {
+        path: "team",
+        component: () => import("@/views/website/Team.vue"),
+      },
+      {
+        path: "testimonial",
+        component: () => import("@/views/website/Testimonial.vue"),
+      }, 
     ],
   },
 ];

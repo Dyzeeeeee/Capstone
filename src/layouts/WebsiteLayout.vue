@@ -1,5 +1,6 @@
 <template>
-    <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders bg-blue-grey-2">
+    
+    <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders bg-light-green-3">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0" style="margin-bottom: 300px;" >
             <a href="" class="navbar-brand p-0">
@@ -11,7 +12,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0 pe-4">
-                    <a href="index" class="nav-item nav-link active">Home</a>
+                    <a href="home" class="nav-item nav-link active">Home</a>
                     <a href="about" class="nav-item nav-link">About</a>
                     <a href="service" class="nav-item nav-link">Service</a>
                     <a href="menu" class="nav-item nav-link">Menu</a>
@@ -80,5 +81,6 @@ export default {
 
 
 <style scoped>
+
 
 </style>
