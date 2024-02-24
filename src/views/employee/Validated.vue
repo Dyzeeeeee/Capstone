@@ -22,8 +22,7 @@
                     </div>
                     <div class="col-12 q-mb-md  ">
                         <q-btn icon="print" color="secondary" style="width: 100%; height: 55px;" no-caps
-                            label="Print Receipt">
-
+                            label="Print Receipt" @click="printReceipt">
                         </q-btn>
                     </div>
                     <div class="col-12 q-mb-md">
@@ -51,53 +50,63 @@
 
             </div>
             <div class="col-4 ">
-                <div class="bg-white q-ma-sm receipt" style="height: 74vh">
-                    <div class="text-bold q-pt-md q-px-md row q-pb-sm  text-h6 justify-center">
+                <div style="background-color: white; margin: 8px; padding: 1rem; height: 74vh;" id="receipt"
+                    ref="receiptDiv">
+                    <div
+                        style="font-weight: bold; padding-top: 1rem; padding-left: 1rem; font-size: 1.25rem; text-align: center;">
                         Anahaw
                     </div>
-                    <div class=" q-px-md row  text-caption justify-center text-center">
+                    <div style="padding-left: 1rem; text-align: center; margin-bottom: 1rem;">
                         Anahaw Address, Calapan, Oriental Mindoro <br>
                         (+63)900-000-0000 <br>
                         AnahawEmail@email.com <br>
                     </div>
-                    <q-separator></q-separator>
-                    <div class=" q-px-md row  text-caption justify-center text-center">
+                    <hr style="margin: 0;">
+                    <div style="padding-left: 1rem; text-align: center;">
                         Served by: Cashier Name
                     </div>
-                    <!--Loop ReceiptItems from here-->
+                    <!-- Loop ReceiptItems from here -->
                     <div v-for="(item) in ReceiptItems" :key="index">
-                        <div class="text-bold q-pt-md q-px-md row text-subtitle2">
-                            {{ item.menu_item }} <!-- Assuming you want to display the index of the item -->
-                            <q-space></q-space>
-                            {{ item.subtotal }}
+                        <div style=" display: flex; justify-content: space-between;">
+                            <div style="flex-basis: 50%; font-size: 1rem;font-weight: bold; text-align: left; ">
+                                {{
+                                    item.menu_item }}
+                            </div>
+                            <div style="flex-basis: 50%; text-align: right; font-size: 1rem; ">Php {{
+                                item.subtotal }} </div>
                         </div>
-                        <div class="text-italic q-px-md text-caption">
-                            {{ item.quantity }} x {{ item.menu_item.price }}
+                        <div style="font-style: italic;">
+                            {{ item.quantity }} x
+                        </div>
+
+                    </div>
+                    <!-- Loop ReceiptItems to here -->
+                    <div style=" display: flex; justify-content: space-between;">
+                        <div style="flex-basis: 50%; font-size: 1rem;font-weight: bold; text-align: right;">TOTAL:
+                        </div>
+                        <div style="flex-basis: 33.3333%; text-align: right; font-size: 1rem;">Php {{
+                            OrderData.total_order_price }} </div>
+                    </div>
+                    <div style="font-weight: ; display: flex; justify-content: space-between;">
+                        <div style="flex-basis: 50%; font-size: 1rem; font-weight: bold; text-align: right;">CASH:
+                        </div>
+                        <div style="flex-basis: 33.3333%; text-align: right; font-size: 1rem;">Php {{ OrderData.tendered }}
                         </div>
                     </div>
-                    <!--Loop ReceiptItems to here-->
-
-
-                    <div class="text-bold row  text-subtitle1">
-                        <div class="justify-center q-pa-md col-4 "></div>
-                        <div class="justify-center q-pa-md col-4 ">TOTAL: </div>
-                        <div class="justify-end text-right q-pa-md col-4">Php {{ OrderData.total_order_price }} </div>
+                    <div style=" display: flex; justify-content: space-between;">
+                        <div style="flex-basis: 50%; font-size: 1rem; text-align: right; font-weight: bold;">CHANGE:
+                        </div>
+                        <div style="flex-basis: 33.3333%; text-align: right; font-size: 1rem;">Php {{ OrderData.change1 }}
+                        </div>
                     </div>
-                    <div class="text-bold q-px-md row  text-subtitle2">
-                        Payment Method <q-space></q-space>Tendered
+                    <!-- <div style="font-weight: bold; padding-left: 1rem; font-size: 1rem;">
+                        VAT <span style="margin-right: 0.5rem;"></span> Vat %
                     </div>
-                    <div class="text-bold row  text-subtitle1 ">
-                        <div class="justify-center q-pa-md col-4 "></div>
-                        <div class="justify-center q-pa-md col-4 ">CHANGE: </div>
-                        <div class="text-right q-pa-md col-4">Php {{ OrderData.change1 }} </div>
-                    </div>
-                    <div class="text-bold q-px-md row  text-subtitle2">
-                        VAT <q-space></q-space>Vat %
-                    </div>
-                    <div class="justify-center row">
+                    <div style="text-align: center; padding: 1rem; font-size: 1rem;">
                         QR siguro
-                    </div>
+                    </div> -->
                 </div>
+
 
 
             </div>
@@ -109,12 +118,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, createApp } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
-
+const receiptDiv = ref(null);
 const orderId = ref(route.params.id);
 
 const newOrder = () => {
@@ -146,6 +155,8 @@ const getOrderItems = async () => {
     }
 };
 
+
+
 onMounted(async () => {
     getOrderItems(); // Fetch order items
     getOrderData();
@@ -153,4 +164,17 @@ onMounted(async () => {
     // If tendered is null, set it to 0
 
 });
+
+const printReceipt = () => {
+    // Create a new window with a specific size
+    const printWindow = window.open('', '_blank',);
+
+    // Append only the receipt div to the new window
+    printWindow.document.body.innerHTML = `<html><head><title>Receipt</title></head><body>${receiptDiv.value.innerHTML}</body></html>`;
+
+    // Trigger the print process in the new window
+    printWindow.print();
+    printWindow.close();
+}
 </script>
+

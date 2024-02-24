@@ -52,11 +52,11 @@ const routes = [
     component: () => import("../views/auth/RegisterView.vue"),
   },
   {
-    path: "/website",
+    path: "/",
     component: () => import("@/layouts/WebsiteLayout.vue"),
     children: [
       {
-        path: "home",
+        path: "",
         component: () => import("@/views/website/Home.vue"),
       },
       {

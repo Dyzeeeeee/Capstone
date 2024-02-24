@@ -9,8 +9,9 @@ import '@quasar/extras/material-icons/material-icons.css'
 import { Quasar as QuasarExtras } from '@quasar/extras/material-icons'
 import { QIcon } from 'quasar'
 import axios from 'axios'
+import './registerServiceWorker'
 
-axios.defaults.baseURL = 'http://capstone.test/Backend/public/' 
+axios.defaults.baseURL = 'http://capstone.test/Backend/public/'
 
 const app = createApp(App)
 
