@@ -55,7 +55,7 @@
       <q-card class="my-qcard" bordered flat>
         <q-card-section class="bg-grey-9 text-white row">
           <div class="col-8" style="display: flex; flex-direction: column; justify-content: flex-end;">
-            <div class="text-subtitle2">Profit</div>
+            <div class="text-subtitle2">Total Expenses</div>
             <div class="text-h3 text-bold ">400</div>
           </div>
           <div class="col-4">
@@ -74,7 +74,7 @@
       <q-card class="my-qcard" bordered flat>
         <q-card-section class="bg-grey-9 text-white row">
           <div class="col-8" style="display: flex; flex-direction: column; justify-content: flex-end;">
-            <div class="text-subtitle2">Total Earnings</div>
+            <div class="text-subtitle2">Profit</div>
             <div class="text-h3 text-bold ">400</div>
           </div>
           <div class="col-4">

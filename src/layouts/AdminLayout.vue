@@ -8,7 +8,7 @@
                     <q-btn flat dense icon="search" />
                     <q-btn flat dense icon="chat_bubble" />
                     <q-btn flat dense icon="notifications" />
-                    <q-btn flat dense icon="storefront" to="/website/home" />
+                    <q-btn flat dense icon="storefront" to="home" />
                     <q-btn flat dense icon="settings" />
                     <q-btn flat dense :icon="fullScreen ? 'fullscreen_exit' : 'fullscreen'" @click="toggleFullScreen" />
                 </div>
