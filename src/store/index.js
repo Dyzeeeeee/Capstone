@@ -1,14 +1,21 @@
-import { createStore } from 'vuex'
+// store/index.js
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-  },
-  getters: {
+    activeItem: null,
   },
   mutations: {
+    setActiveItem(state, item) {
+      state.activeItem = item;
+    },
   },
   actions: {
+    setActiveItem({ commit }, item) {
+      commit('setActiveItem', item);
+    },
   },
-  modules: {
-  }
-})
+  getters: {
+    getActiveItem: (state) => state.activeItem,
+  },
+});

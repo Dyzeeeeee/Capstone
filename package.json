@@ -8,13 +8,17 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.9",
+    "apexcharts": "^3.46.0",
     "axios": "^1.6.7",
+    "chart.js": "^4.4.1",
     "core-js": "^3.8.3",
     "quasar": "^2.14.3",
     "register-service-worker": "^1.7.2",
     "sass-loader": "^14.1.0",
     "vue": "^3.2.13",
+    "vue-apexcharts": "^1.6.2",
     "vue-router": "^4.0.3",
+    "vue3-apexcharts": "^1.5.2",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
