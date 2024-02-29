@@ -8,19 +8,19 @@
                     <div class="row g-3">
                         <div class="col-6 text-start">
                             <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s"
-                                src="@/assets/img/about-1.jpg">
+                                src="@/assets/img/anahaw 6.jpg">
                         </div>
                         <div class="col-6 text-start">
                             <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s"
-                                src="@/assets/img/about-2.jpg" style="margin-top: 25%;">
+                                src="@/assets/img/anahaw 3.jpg" style="margin-top: 25%;">
                         </div>
                         <div class="col-6 text-end">
                             <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s"
-                                src="@/assets/img/about-3.jpg">
+                                src="@/assets/img/anahaw 8.jpg">
                         </div>
                         <div class="col-6 text-end">
                             <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s"
-                                src="@/assets/img/about-4.jpg">
+                                src="@/assets/img/anahaw 7.jpg">
                         </div>
                     </div>
                 </div>

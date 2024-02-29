@@ -1,6 +1,6 @@
 <template>
     
-    <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders bg-light-green-3">
+    <q-layout view="hHh Lpr lff" container style="height: 100vh;" class="shadow-2 rounded-borders bg-light-blue-1">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0" style="margin-bottom: 300px;" >
             <a href="" class="navbar-brand p-0">
